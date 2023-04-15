@@ -23,8 +23,6 @@ public class OrderDetail {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "total_amount")
-    private Double totalAmount;
 
     public OrderDetail() {
     }
@@ -69,11 +67,4 @@ public class OrderDetail {
         this.price = price;
     }
 
-    public Double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
-    }
 }

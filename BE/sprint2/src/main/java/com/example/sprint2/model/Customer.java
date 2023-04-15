@@ -1,6 +1,7 @@
 package com.example.sprint2.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
@@ -27,6 +28,11 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private Set<Order> orderList;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+
+    private User user;
 
     public Customer() {
     }

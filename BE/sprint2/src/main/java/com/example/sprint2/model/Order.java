@@ -24,6 +24,11 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private Set<OrderDetail> orderDetailList;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
     public Order() {
     }
 
