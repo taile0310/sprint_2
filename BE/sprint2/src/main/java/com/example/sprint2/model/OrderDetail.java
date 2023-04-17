@@ -23,6 +23,9 @@ public class OrderDetail {
     @Column(name = "price")
     private Double price;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
 
     public OrderDetail() {
     }

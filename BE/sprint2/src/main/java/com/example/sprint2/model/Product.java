@@ -24,6 +24,8 @@ public class Product {
 
     @Column(name = "quantity")
     private Integer quantity;
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -86,5 +88,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

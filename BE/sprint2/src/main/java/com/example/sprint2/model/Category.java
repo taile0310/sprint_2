@@ -13,8 +13,7 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
-    @Column(name = "description", nullable = false)
-    private String description;
+
 
     @OneToMany(mappedBy = "category")
     private Set<Product> productList;

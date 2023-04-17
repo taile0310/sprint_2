@@ -3,6 +3,7 @@ package com.example.sprint2.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "payments")
@@ -18,5 +19,5 @@ public class Payment {
     private String status;
 
     @OneToMany(mappedBy = "payment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Order> orders = new ArrayList<>();
+    private Set<OrderDetail> orderDetails;
 }

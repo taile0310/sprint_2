@@ -13,7 +13,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private User user;
 
     @Column(name = "order_date")
     private Date orderDate;
@@ -21,13 +21,14 @@ public class Order {
     @Column(name = "total_amount")
     private Double totalAmount;
 
+    @Column(name = "note")
+    private String note;
+
+
     @OneToMany(mappedBy = "order")
     private Set<OrderDetail> orderDetailList;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_id")
-    private Payment payment;
 
     public Order() {
     }
@@ -40,13 +41,7 @@ public class Order {
         this.id = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public Date getOrderDate() {
         return orderDate;
@@ -70,5 +65,21 @@ public class Order {
 
     public void setOrderDetailList(Set<OrderDetail> orderDetailList) {
         this.orderDetailList = orderDetailList;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
