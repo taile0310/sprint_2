@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {BodyComponent} from './body/body.component';
 import {ShopComponent} from './shop/shop.component';
+import {LoginComponent} from './login/login.component';
+import {SignUpComponent} from './sign-up/sign-up.component';
+import {DetailShopComponent} from './detail-shop/detail-shop.component';
 
 
 const routes: Routes = [
@@ -10,6 +13,15 @@ const routes: Routes = [
   },
   {
     path: 'shop', component: ShopComponent
+  },
+  {
+    path: 'login', component: LoginComponent
+  },
+  {
+    path: 'sign-up', component: SignUpComponent
+  },
+  {
+    path: 'detail-shop', component: DetailShopComponent
   }
 ];
 
