@@ -1,36 +1,23 @@
-package com.example.sprint2.model;
+package com.example.sprint2.dto;
+
+import com.example.sprint2.model.Category;
 
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "products")
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDTO {
     private Long id;
 
-    @Column(name = "product_name")
     private String productName;
 
-    @Column(name = "product_description")
     private String productDescription;
 
-    @Column(name = "price")
     private Double price;
 
-    @Column(name = "image")
     private String image;
 
-    @Column(name = "quantity")
     private Integer quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
     private Category category;
 
-    public Product() {
-    }
 
     public Long getId() {
         return id;

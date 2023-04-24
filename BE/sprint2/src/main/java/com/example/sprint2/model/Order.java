@@ -1,5 +1,7 @@
 package com.example.sprint2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -26,6 +28,7 @@ public class Order {
 
 
     @OneToMany(mappedBy = "order")
+    @JsonIgnore
     private Set<OrderDetail> orderDetailList;
 
 

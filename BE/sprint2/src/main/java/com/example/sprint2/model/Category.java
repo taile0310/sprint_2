@@ -1,5 +1,7 @@
 package com.example.sprint2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ public class Category {
 
 
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private Set<Product> productList;
 
     public Category() {
