@@ -10,6 +10,12 @@ export class SignUpComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.view();
   }
-
+  view(): void {
+    const element = document.getElementById('sign-up');
+    if (element) {
+      element.scrollIntoView();
+    }
+  }
 }

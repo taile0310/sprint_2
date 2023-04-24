@@ -10,6 +10,14 @@ export class BodyComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.view();
+  }
+
+  view(): void {
+    const element = document.getElementById('header');
+    if (element) {
+      element.scrollIntoView();
+    }
   }
 
 }

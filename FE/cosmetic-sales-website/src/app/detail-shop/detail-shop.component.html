@@ -227,3 +227,52 @@
 <!--  </div>-->
 <!--</div>-->
 <!--&lt;!&ndash; Products End &ndash;&gt;-->
+
+
+
+<div class="carousels">
+  <div class="carousel-inners">
+    <div class="carousel-items active">
+      <img src="../../assets/img/kemnenFIT500x500.jpg" alt="Logo 1">
+    </div>
+    <div class="carousel-items active">
+      <img src="../../assets/img/bangmat3ce500x500.jpg" alt="Logo 2">
+    </div>
+    <div class="carousel-items active">
+      <img src="../../assets/img/sonboobi500x500.png" alt="Logo 3">
+    </div>
+  </div>
+</div>
+
+<script>
+  Items = carousels.querySelectorAll('.carousel-items');
+  const prevBtn = carousels.querySelector('.prev-btn');
+  const nextBtn = carousels.querySelector('.next-btn');
+  let currentIndex = 0;
+
+  function showItem(index) {
+    Items.forEach(item => item.classList.remove('active'));
+    Items[index].classList.add('active');
+  }
+
+  function nextItem() {
+    currentIndex++;
+    if (currentIndex >= Items.length) {
+      currentIndex = 0;
+    }
+    showItem(currentIndex);
+  }
+
+  function prevItem() {
+    currentIndex--;
+    if (currentIndex < 0) {
+      currentIndex = Items.length - 1;
+    }
+    showItem(currentIndex);
+  }
+
+  nextBtn.addEventListener('click', nextItem);
+  prevBtn.addEventListener('click', prevItem);
+
+  showItem(currentIndex);
+</script>

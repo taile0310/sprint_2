@@ -7,9 +7,13 @@ import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
 import { HeaderComponent } from './header/header.component';
 import { ShopComponent } from './shop/shop.component';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { DetailShopComponent } from './detail-shop/detail-shop.component';
+import {ChangePasswordComponent} from './security-authentication/change-password/change-password.component';
+import {SignUpComponent} from './security-authentication/sign-up/sign-up.component';
+import {DetailShopComponent} from './detail-shop/detail-shop.component';
+import {ForgotPasswordComponent} from './security-authentication/forgot-password/forgot-password.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {LoginComponent} from './security-authentication/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +24,16 @@ import { DetailShopComponent } from './detail-shop/detail-shop.component';
     ShopComponent,
     LoginComponent,
     SignUpComponent,
-    DetailShopComponent
+    DetailShopComponent,
+    ChangePasswordComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

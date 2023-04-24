@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {BodyComponent} from './body/body.component';
 import {ShopComponent} from './shop/shop.component';
-import {LoginComponent} from './login/login.component';
-import {SignUpComponent} from './sign-up/sign-up.component';
+import {LoginComponent} from './security-authentication/login/login.component';
+import {SignUpComponent} from './security-authentication/sign-up/sign-up.component';
 import {DetailShopComponent} from './detail-shop/detail-shop.component';
 
 

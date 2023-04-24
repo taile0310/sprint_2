@@ -116,6 +116,18 @@
           <div class="navbar-nav ml-auto py-0">
             <a routerLink="/login" class="nav-item nav-link">Đăng nhập </a>
             <a routerLink="/sign-up" class="nav-item nav-link">Đăng kí</a>
+            <li [hidden]="!isLoggedIn">
+              <div class="dropdownUser">
+                <div class="n-item d-flex align-items-center">
+                  <i class="bi bi-person-lines-fill mx-2" ></i>
+                  <span style="color: #eb5d1e"><b>{{nameEmployee}}</b></span></div>
+                <div class="dropdown-content p-0">
+                  <div class=" getstarted" routerLink="/security/change-password"><button class="btn">Đổi mật khẩu</button></div>
+                  <div class=" getstarted" (click)="logOut()"><button class="btn">Đăng xuất</button></div>
+                </div>
+              </div>
+
+            </li>
           </div>
         </div>
       </nav>
