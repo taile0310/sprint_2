@@ -12,8 +12,11 @@ import {SignUpComponent} from './security-authentication/sign-up/sign-up.compone
 import {DetailShopComponent} from './detail-shop/detail-shop.component';
 import {ForgotPasswordComponent} from './security-authentication/forgot-password/forgot-password.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './security-authentication/login/login.component';
+import {AuthInterceptor} from './security-authentication/security-auth/auth.interceptor';
+import { ListUserComponent } from './user/list-user/list-user.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import {LoginComponent} from './security-authentication/login/login.component';
     SignUpComponent,
     DetailShopComponent,
     ChangePasswordComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ListUserComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,7 @@ import {LoginComponent} from './security-authentication/login/login.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

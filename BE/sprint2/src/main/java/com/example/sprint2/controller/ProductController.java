@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("api/product")
+@RequestMapping("api/public/product")
 public class ProductController {
     @Autowired
     private IProductService productService;
@@ -69,6 +69,12 @@ public class ProductController {
     public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         productService.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<?> getDetailProduct(@PathVariable("id") Long id){
+        Product product = productService.findById(id);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
 }

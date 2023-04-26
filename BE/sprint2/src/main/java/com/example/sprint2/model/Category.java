@@ -15,8 +15,6 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
-
-
     @OneToMany(mappedBy = "category")
     @JsonIgnore
     private Set<Product> productList;
