@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../service/product.service';
 import {ActivatedRoute} from '@angular/router';
 import {Product} from '../model/product';
+import {Category} from '../model/category';
 
 @Component({
   selector: 'app-detail-shop',
@@ -9,8 +10,8 @@ import {Product} from '../model/product';
   styleUrls: ['./detail-shop.component.css']
 })
 export class DetailShopComponent implements OnInit {
-  product: Product;
   id: number;
+  product: Product;
 
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute) {
@@ -18,7 +19,9 @@ export class DetailShopComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDetailProduct();
+    this.view()
   }
+
 
   getDetailProduct() {
     this.activatedRoute.paramMap.subscribe(data => {
@@ -28,5 +31,12 @@ export class DetailShopComponent implements OnInit {
     this.productService.getDetailProduct(this.id).subscribe(data => {
       this.product = data;
     });
+  }
+
+  view(): void {
+    const element = document.getElementById('detail-shop');
+    if (element) {
+      element.scrollIntoView();
+    }
   }
 }

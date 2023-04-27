@@ -7,17 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BodyComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.view();
   }
 
   view(): void {
-    const element = document.getElementById('header');
+    const element = document.getElementById('body');
     if (element) {
       element.scrollIntoView();
     }
   }
-
 }
+

@@ -37,6 +37,9 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles ;
 
+    @OneToOne(mappedBy = "user")
+    private Order order;
+
     public Long getId() {
         return id;
     }
@@ -99,5 +102,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

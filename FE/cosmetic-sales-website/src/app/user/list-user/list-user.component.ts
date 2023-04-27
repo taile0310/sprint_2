@@ -14,7 +14,7 @@ export class ListUserComponent implements OnInit {
   currentPage = 0;
   size = 5;
   totalPages: number;
-  page = 0;
+
 
   constructor(private userService: UserService) {
   }
@@ -32,15 +32,15 @@ export class ListUserComponent implements OnInit {
   }
 
   previous() {
-    if (this.page > 0) {
-      this.page--;
+    if (this.currentPage > 0) {
+      this.currentPage--;
       this.getAll();
     }
   }
 
   next() {
-    if (this.page < this.totalPages - 1) {
-      this.page++;
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage++;
       this.getAll();
     }
   }

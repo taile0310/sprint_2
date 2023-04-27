@@ -11,10 +11,8 @@ public interface IUserService {
 
     Page<User> listUser(Pageable pageable);
 
-
     void saveUser(User user);
     User findById( Long id);
-
     void deleteById(@Param("id") Long id);
 
 }

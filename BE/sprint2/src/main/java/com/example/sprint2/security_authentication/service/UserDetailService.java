@@ -1,6 +1,5 @@
 package com.example.sprint2.security_authentication.service;
 
-
 import com.example.sprint2.model.User;
 import com.example.sprint2.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

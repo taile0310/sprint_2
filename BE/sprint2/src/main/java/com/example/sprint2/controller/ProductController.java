@@ -1,8 +1,10 @@
 package com.example.sprint2.controller;
 
 import com.example.sprint2.dto.ProductDTO;
+import com.example.sprint2.model.Category;
 import com.example.sprint2.model.Product;
 import com.example.sprint2.model.User;
+import com.example.sprint2.service.ICategoryService;
 import com.example.sprint2.service.IProductService;
 import com.example.sprint2.service.impl.ProductService;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -26,17 +29,35 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private IProductService productService;
+    @Autowired
+    private ICategoryService categoryService;
+
+    @GetMapping("/list-category")
+    public ResponseEntity<?> getListCategory(){
+        List<Category> categoryList = categoryService.listCategory();
+        if (categoryList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(categoryList, HttpStatus.OK);
+    }
+
 
     @GetMapping("/list")
     public ResponseEntity<?> getListProduct(@RequestParam(required = false, defaultValue = "0") int page,
-                                            @RequestParam(required = false, defaultValue = "5") int size) {
+                                            @RequestParam(required = false, defaultValue = "5") int size,
+                                            @RequestParam(required = false, defaultValue = "") String productName,
+                                            @RequestParam(required = false, defaultValue = "") Long categoryId) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Product> productPage = productService.listProduct(pageable);
+        Page<Product> productPage;
+        if (categoryId == 0) {
+            productPage = productService.searchOneField(productName, pageable);
+        } else {
+            productPage = productService.searchTwoField(productName, categoryId, pageable);
+        }
         if (productPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(productPage, HttpStatus.OK);
         }
+        return new ResponseEntity<>(productPage, HttpStatus.OK);
     }
 
     @PostMapping("/add")
@@ -72,7 +93,7 @@ public class ProductController {
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<?> getDetailProduct(@PathVariable("id") Long id){
+    public ResponseEntity<?> getDetailProduct(@PathVariable("id") Long id) {
         Product product = productService.findById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }

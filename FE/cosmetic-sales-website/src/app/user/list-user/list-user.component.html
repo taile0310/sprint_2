@@ -48,18 +48,18 @@
       <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center mb-3">
           <li class="page-item">
-            <button [ngClass]="{disabled: page === 0}" style="background-color: #ecb49b"
+            <button [ngClass]="{disabled: currentPage === 0}" style="background-color: #ecb49b"
                     (click)="previous()" class="btn" aria-label="Previous">
               <span aria-hidden="true" style="color: black">Trước</span>
             </button>
           </li>
           <li>
             <a style="color: black" class="page-link page">
-              {{ page + 1 }}/ {{totalPages}}
+              {{ currentPage + 1 }}/ {{totalPages}}
             </a>
           </li>
           <li class="page-item">
-            <button [ngClass]="{disabled: page === totalPages - 1}" style="background-color:  #ecb49b"
+            <button [ngClass]="{disabled: currentPage === totalPages - 1}" style="background-color:  #ecb49b"
                     class="btn" (click)="next()" aria-label="Next">
               <span aria-hidden="true" style="color: black">Sau</span>
             </button>

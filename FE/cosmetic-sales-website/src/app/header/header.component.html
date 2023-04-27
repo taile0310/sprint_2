@@ -106,7 +106,8 @@
           <div class="navbar-nav mr-auto py-0">
             <a href="" class="nav-item nav-link active">Trang chủ</a>
             <a routerLink="/shop" class="nav-item nav-link">Cửa hàng</a>
-            <a [hidden]="!isLoggedIn  || role!=='ROLE_ADMIN'" routerLink="/user/list" class="nav-item nav-link">Nhân viên</a>
+            <a [hidden]="!isLoggedIn  || role!=='ROLE_ADMIN'" routerLink="/user/list" class="nav-item nav-link">Nhân
+              viên</a>
             <a [hidden]="!isLoggedIn || role =='ROLE_CUSTOMER'" routerLink="" class="nav-item nav-link">Khách hàng</a>
             <a routerLink="" class="nav-item nav-link">Liên hệ</a>
           </div>
@@ -134,18 +135,15 @@
       <div id="header-carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active" style="height: 410px;">
-            <img class="img-fluid" src="../../assets/img/background.jpg" alt="Image">
+            <img style="position: absolute; z-index: 2" class="img-fluid" src="../../assets/img/background.jpg"
+                 alt="Image">
             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-              <div class="p-3" style="max-width: 700px;">
-                <!--                <h4 class="text-light text-uppercase font-weight-medium mb-3">-->
-                <!--                  Giảm 10% cho đơn hàng đầu tiên của bạn</h4>-->
-                <!--                <h3 class="display-4 text-white font-weight-semi-bold mb-4"></h3>-->
-                <!--                <a href="" class="btn btn-light py-2 px-3">Cửa hàng</a>-->
-              </div>
+              <div class="p-3" style="max-width: 700px;"></div>
             </div>
           </div>
           <div class="carousel-item" style="height: 410px;">
-            <img class="img-fluid" src="../../assets/img/chup-hinh-quang-cao-my-pham-1024x430.jpg" alt="Image">
+            <img style="position: absolute; z-index: 2" class="img-fluid"
+                 src="../../assets/img/chup-hinh-quang-cao-my-pham-1024x430.jpg" alt="Image">
             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
               <div class="p-3" style="max-width: 700px;">
                 <h4 class="text-light text-uppercase font-weight-medium mb-3">Giảm 10% cho đơn hàng đầu tiên của
@@ -156,7 +154,8 @@
             </div>
           </div>
           <div class="carousel-item" style="height: 410px;">
-            <img class="img-fluid" src="../../assets/img/mh_1_IROQ1200x500.jpg" alt="Image">
+            <img style="position: absolute; z-index: 2" class="img-fluid" src="../../assets/img/mh_1_IROQ1200x500.jpg"
+                 alt="Image">
             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
               <div class="p-3" style="max-width: 700px;">
                 <h4 class="text-light text-uppercase font-weight-medium mb-3">Giảm 10% cho đơn hàng đầu tiên của

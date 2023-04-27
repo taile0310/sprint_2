@@ -13,8 +13,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "order_date")
@@ -83,6 +83,8 @@ public class Order {
     }
 
     public void setUser(User user) {
-        this.user = user;
+    }
+
+    public void setPayment(Payment payment) {
     }
 }
