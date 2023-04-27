@@ -13,10 +13,20 @@ public class OrderDTO {
 
     private String paymentType;
 
+    private Integer quantity;
+
     private Set<OrderDetailDTO> orderDetails;
 
     public User getUser() {
         return user;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public void setUser(User user) {

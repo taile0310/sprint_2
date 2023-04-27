@@ -25,6 +25,8 @@ public class Order {
 
     @Column(name = "note")
     private String note;
+    @Column(name = "quantity")
+    private Integer quantity;
 
 
     @OneToMany(mappedBy = "order")
@@ -34,6 +36,17 @@ public class Order {
 
 
     public Order() {
+    }
+
+    public Order(Product product, Integer quantity, User user) {
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Long getId() {
