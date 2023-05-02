@@ -1,8 +1,10 @@
 package com.example.sprint2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,8 +39,12 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles ;
 
-    @OneToOne(mappedBy = "user")
-    private Order order;
+    public User() {
+    }
+
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<Order> order;
 
     public Long getId() {
         return id;
@@ -104,11 +110,16 @@ public class User {
         this.roles = roles;
     }
 
-    public Order getOrder() {
+    public List<Order> getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(List<Order> order) {
         this.order = order;
+    }
+
+    public void addOrder(Order order) {
+        this.order.add(order);
+        order.setUser(this);
     }
 }

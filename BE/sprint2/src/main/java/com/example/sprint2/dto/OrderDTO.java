@@ -2,23 +2,25 @@ package com.example.sprint2.dto;
 
 import com.example.sprint2.model.User;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 public class OrderDTO {
-    private User user;
-
-    private Double totalAmount;
-
-    private String note;
-
-    private String paymentType;
-
+    private Long id;
     private Integer quantity;
+    private BigDecimal totalAmount;
+    private Long productId;
+    private Long userId;
 
-    private Set<OrderDetailDTO> orderDetails;
+    public OrderDTO() {
+    }
 
-    public User getUser() {
-        return user;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getQuantity() {
@@ -29,39 +31,27 @@ public class OrderDTO {
         this.quantity = quantity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Double getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(Double totalAmount) {
+    public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public String getNote() {
-        return note;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
-    public String getPaymentType() {
-        return paymentType;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
-    }
-
-    public Set<OrderDetailDTO> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(Set<OrderDetailDTO> orderDetails) {
-        this.orderDetails = orderDetails;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

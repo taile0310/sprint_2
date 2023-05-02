@@ -4,6 +4,7 @@ public class OrderDetailDTO {
     private Long productId;
 
     private Integer quantity;
+    private Double price;
 
     public Long getProductId() {
         return productId;
@@ -19,5 +20,13 @@ public class OrderDetailDTO {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

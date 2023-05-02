@@ -2,6 +2,7 @@ package com.example.sprint2.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "products")

@@ -30,6 +30,9 @@ public class OrderDetail {
     public OrderDetail() {
     }
 
+    public OrderDetail(Product product, Order order) {
+    }
+
     public Long getId() {
         return id;
     }

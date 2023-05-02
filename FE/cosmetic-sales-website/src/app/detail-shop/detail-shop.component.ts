@@ -3,6 +3,7 @@ import {ProductService} from '../service/product.service';
 import {ActivatedRoute} from '@angular/router';
 import {Product} from '../model/product';
 import {Category} from '../model/category';
+import {TokenStorageService} from '../security-authentication/service/token-storage.service';
 
 @Component({
   selector: 'app-detail-shop',
@@ -12,14 +13,16 @@ import {Category} from '../model/category';
 export class DetailShopComponent implements OnInit {
   id: number;
   product: Product;
+  userId: number;
 
   constructor(private productService: ProductService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {
     this.getDetailProduct();
-    this.view()
+    this.view();
   }
 
 
@@ -38,5 +41,9 @@ export class DetailShopComponent implements OnInit {
     if (element) {
       element.scrollIntoView();
     }
+  }
+
+  getUserNameAccount() {
+    this.userId = this.tokenStorageService.getUser().id;
   }
 }

@@ -9,6 +9,7 @@ import {ListUserComponent} from './user/list-user/list-user.component';
 import {UserGuard} from './security-authentication/security-auth/user.guard';
 import {AdminGuard} from './security-authentication/security-auth/admin.guard';
 import {ErrorComponent} from './error/error.component';
+import {CardComponent} from './card/card.component';
 
 
 const routes: Routes = [
@@ -29,8 +30,12 @@ const routes: Routes = [
   },
   {
     path: 'user/list', component: ListUserComponent, canActivate: [AdminGuard]
-  }, {
+  },
+  {
     path: '**', component: ErrorComponent
+  },
+  {
+    path: 'card', component: CardComponent
   }
 ];
 

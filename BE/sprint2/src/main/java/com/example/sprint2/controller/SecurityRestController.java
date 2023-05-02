@@ -56,6 +56,7 @@ public class SecurityRestController {
                         jwt,
                         userDetails.getUsername(),
                         usersService.findUserByUsername(loginRequest.getUsername()).getName(),
+                        usersService.findUserByUsername(loginRequest.getUsername()).getId(),
                         roles)
         );
     }
