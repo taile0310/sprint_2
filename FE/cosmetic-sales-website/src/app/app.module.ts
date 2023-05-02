@@ -17,7 +17,7 @@ import {LoginComponent} from './security-authentication/login/login.component';
 import {AuthInterceptor} from './security-authentication/security-auth/auth.interceptor';
 import { ListUserComponent } from './user/list-user/list-user.component';
 import { ErrorComponent } from './error/error.component';
-import { CardComponent } from './card/card/card.component';
+import {CardComponent} from './card/card.component';
 
 @NgModule({
   declarations: [

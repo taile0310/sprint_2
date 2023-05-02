@@ -17,7 +17,7 @@ const routes: Routes = [
     path: '', component: BodyComponent
   },
   {
-    path: 'shop', component: ShopComponent
+    path: 'shop', component: ShopComponent, canActivate: [UserGuard]
   },
   {
     path: 'login', component: LoginComponent
@@ -26,7 +26,7 @@ const routes: Routes = [
     path: 'sign-up', component: SignUpComponent
   },
   {
-    path: 'detail/:id', component: DetailShopComponent
+    path: 'detail/:id', component: DetailShopComponent, canActivate: [UserGuard]
   },
   {
     path: 'user/list', component: ListUserComponent, canActivate: [AdminGuard]
@@ -35,7 +35,7 @@ const routes: Routes = [
     path: '**', component: ErrorComponent
   },
   {
-    path: 'card', component: CardComponent
+    path: 'card', component: CardComponent, canActivate: [UserGuard]
   }
 ];
 

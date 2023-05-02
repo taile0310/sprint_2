@@ -1,14 +1,10 @@
 package com.example.sprint2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -39,14 +35,6 @@ public class Order {
     @OneToMany(mappedBy = "order")
     @JsonIgnore
     private List<OrderDetail> orderDetailList;
-
-    public void addOrderDetail(OrderDetail orderDetail) {
-        if (this.orderDetailList == null) {
-            this.orderDetailList = new ArrayList<>();
-        }
-        this.orderDetailList.add(orderDetail);
-        orderDetail.setOrder(this);
-    }
 
     public Order() {
         this.orderDate = LocalDateTime.now();

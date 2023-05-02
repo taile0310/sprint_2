@@ -13,6 +13,5 @@ export class UserService {
   }
 
   getListUser(page: number, size: number): Observable<any> {
-    debugger
     return this.httpClient.get<any>(this.apiListUser + '?page=' + page + '&size=' + size);
   }}
