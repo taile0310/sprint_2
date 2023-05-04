@@ -20,17 +20,16 @@ public class OrderDetail {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "price")
-    private Double price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_id")
-    private Payment payment;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(Product product, Order order) {
+
+    public OrderDetail(Integer quantity, Product product,Order order) {
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -65,19 +64,4 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
 }

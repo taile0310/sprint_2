@@ -6,29 +6,21 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class OrdersService {
+  private api = 'http://localhost:8080/api/public';
 
   constructor(private httpClient: HttpClient) {
   }
 
   showAllOrder(id: number): Observable<any> {
-    return this.httpClient.get<any>('http://localhost:8080/api/public/' + id);
+    return this.httpClient.get<any>('http://localhost:8080/api/public/cart/' + id);
+  }
+  changeQuantity(orderDetailId: number, quantity: number) {
+    return this.httpClient.get<any>(
+      this.api + '/changeQuantity?orderDetailId=' + orderDetailId + '&quantity=' + quantity);
   }
 
-  createOrders(userId: number, productId: number, quantity: number, totalAmount: number): Observable<any> {
-    // tslint:disable-next-line:prefer-const
-    let dto = { userId, productId, quantity, totalAmount };
-    return this.httpClient.post('http://localhost:8080/api/public/create', dto);
-  }
-
-  increaseQuantity(id): Observable<any> {
-    // tslint:disable-next-line:prefer-const
-    let dto = {id};
-    return this.httpClient.post('http://localhost:8080/api/public/increase', dto);
-  }
-
-  reduceQuantity(id): Observable<any> {
-    // tslint:disable-next-line:prefer-const
-    let dto = {id};
-    return this.httpClient.post('http://localhost:8080/api/public/reduce', dto);
+  addToCart(userId: number, productId: number, quantity: number) {
+    return this.httpClient.get<any>(
+      this.api + '/addCart?userId=' + userId + '&productId=' + productId + '&quantity=' + quantity);
   }
 }

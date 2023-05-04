@@ -39,12 +39,18 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles ;
 
-    public User() {
-    }
 
     @OneToMany(mappedBy = "user")
     @JsonBackReference
     private List<Order> order;
+
+    public User(Long id) {
+        this.id = id;
+    }
+
+    public User() {
+    }
+
 
     public Long getId() {
         return id;

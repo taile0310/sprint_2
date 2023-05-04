@@ -3,6 +3,8 @@ import {TokenStorageService} from '../security-authentication/service/token-stor
 import {ShareService} from '../security-authentication/service/share.service';
 import {Router} from '@angular/router';
 import Swal from "sweetalert2";
+import {OrdersService} from '../service/orders.service';
+import {Orders} from '../model/orders';
 
 @Component({
   selector: 'app-header',
@@ -15,9 +17,10 @@ export class HeaderComponent implements OnInit {
   nameEmployee: string;
   role: string;
   isLoggedIn = false;
-
   constructor(private tokenStorageService: TokenStorageService,
               private shareService: ShareService,
+              private ordersService: OrdersService,
+              private token: TokenStorageService,
               private router: Router) { }
   loadHeader(): void {
     if (this.tokenStorageService.getToken()) {
@@ -53,5 +56,4 @@ export class HeaderComponent implements OnInit {
       this.nameEmployee = this.tokenStorageService.getUser().name;
     }
   }
-
 }

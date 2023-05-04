@@ -2,7 +2,6 @@ package com.example.sprint2.model;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -30,7 +29,12 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    public Product(Long id) {
+        this.id = id;
+    }
+
     public Product() {
+
     }
 
     public Long getId() {

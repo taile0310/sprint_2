@@ -1,9 +1,9 @@
 package com.example.sprint2.service;
 
 
+import com.example.sprint2.dto.OrderDetailDTO;
 import com.example.sprint2.model.Order;
 import com.example.sprint2.model.User;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -11,9 +11,10 @@ public interface IOrderService {
     List<Order> findByUserAndOrderDateIsNull(User user);
     Order findById(Long id);
 
-    List<Order> findCartBy(Long user_id);
+    List<OrderDetailDTO> findCartBy(Long userId);
 
     void createCart(Order order);
 
 
+    boolean changeQuantity(Long id, int quantity);
 }

@@ -12,7 +12,7 @@
 <!-- Page Header End -->
 
 <!-- Cart Start -->
-<div class="container-fluid pt-5" *ngFor=" let o of orders">
+<div class="container-fluid pt-5" >
   <div class="row px-xl-5">
     <div class="col-lg-8 table-responsive mb-5">
       <table class="table table-bordered text-center mb-0">
@@ -25,26 +25,26 @@
           <th>Hủy</th>
         </tr>
         </thead>
-        <tbody class="align-middle" >
+        <tbody class="align-middle" *ngFor=" let o of orderDetail" >
         <tr>
-          <td class="align-middle"><img src="{{o.product.image}}" alt="" style="width: 50px;"> {{o.product.productName}}</td>
-          <td class="align-middle">{{o.product.price}}</td>
+          <td class="align-middle"><img src="{{o?.image}}" alt="" style="width: 50px;">{{o?.productName}}</td>
+          <td class="align-middle">{{o?.price}}</td>
           <td class="align-middle">
             <div class="input-group quantity mx-auto" style="width: 100px;">
               <div class="input-group-btn">
-                <button class="btn btn-sm btn-primary btn-minus" (click)="stepDown(o.id)" >
+                <button class="btn btn-sm btn-primary btn-minus" >
                   <i class="fa fa-minus"></i>
                 </button>
               </div>
-              <input readonly [value]="o.quantity" type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
+              <input readonly  type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
               <div class="input-group-btn">
-                <button class="btn btn-sm btn-primary btn-plus" (click)="stepUp(o.id)">
+                <button class="btn btn-sm btn-primary btn-plus" >
                   <i class="fa fa-plus"></i>
                 </button>
               </div>
             </div>
           </td>
-          <td class="align-middle">$150</td>
+          <td class="align-middle">{{ o.quantity}}</td>
           <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
         </tr>
         </tbody>
@@ -66,13 +66,13 @@
         <div class="card-body">
           <div class="d-flex justify-content-between mb-3 pt-1">
             <h6 class="font-weight-medium">Tạm tính</h6>
-            <h6 class="font-weight-medium">{{o.totalAmount}}</h6>
+            <h6 class="font-weight-medium"></h6>
           </div>
         </div>
         <div class="card-footer border-secondary bg-transparent">
           <div class="d-flex justify-content-between mt-2">
             <h5 class="font-weight-bold">Tổng thanh toán</h5>
-            <h5 class="font-weight-bold">{{o.totalAmount}}</h5>
+            <h5 class="font-weight-bold"></h5>
           </div>
           <button class="btn btn-block btn-primary my-3 py-3">Đặt hàng</button>
         </div>

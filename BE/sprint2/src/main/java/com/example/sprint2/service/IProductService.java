@@ -18,6 +18,7 @@ public interface IProductService {
     Page<Product> searchTwoField(String productName, Long categoryId, Pageable pageable);
     Page<Product> searchOneField(String productName, Pageable pageable);
 
+    Product getProductId( Long productId);
 
 
 }

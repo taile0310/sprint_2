@@ -18,6 +18,7 @@ import {AuthInterceptor} from './security-authentication/security-auth/auth.inte
 import { ListUserComponent } from './user/list-user/list-user.component';
 import { ErrorComponent } from './error/error.component';
 import {CardComponent} from './card/card.component';
+import { PayComponent } from './pay/pay.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {CardComponent} from './card/card.component';
     ForgotPasswordComponent,
     ListUserComponent,
     ErrorComponent,
-    CardComponent
+    CardComponent,
+    PayComponent
   ],
   imports: [
     BrowserModule,

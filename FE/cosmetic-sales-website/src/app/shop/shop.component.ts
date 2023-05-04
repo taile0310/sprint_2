@@ -2,6 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from '../model/product';
 import {ProductService} from '../service/product.service';
 import {Category} from '../model/category';
+import {OrdersService} from '../service/orders.service';
+import {ShareService} from '../security-authentication/service/share.service';
+import {TokenStorageService} from '../security-authentication/service/token-storage.service';
+import {Orders} from '../model/orders';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -17,17 +22,33 @@ export class ShopComponent implements OnInit {
   totalPages = 0;
   categoryId = 0;
   productName = '';
+  userId: number;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+              private ordersService: OrdersService,
+              private shareService: ShareService,
+              private token: TokenStorageService,
+              private router: Router) {
     this.productService.getListCategory().subscribe(data => {
       this.category = data;
     });
   }
 
+  getUserId() {
+    if (this.token.getToken()) {
+      this.userId = this.token.getUser().id;
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
+
+
   ngOnInit(): void {
     this.view();
     this.getAll();
+    this.getUserId();
   }
+
 
   getAll() {
     this.productService.getListProduct(this.currentPage, this.size, this.productName, this.categoryId).subscribe(data => {
@@ -69,5 +90,11 @@ export class ShopComponent implements OnInit {
       element.scrollIntoView();
     }
   }
+
+
+    addToCart(productId: number, quantity: number) {
+      this.ordersService.addToCart(this.userId, productId, quantity).subscribe(() => {
+      });
+    }
 
 }

@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../model/user';
 import {Orders} from '../model/orders';
 import {ProductService} from '../service/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {OrdersService} from '../service/orders.service';
 import {TokenStorageService} from '../security-authentication/service/token-storage.service';
 import {ShareService} from '../security-authentication/service/share.service';
+import {OrderDetail} from '../model/order-detail';
 
 @Component({
   selector: 'app-card',
@@ -13,10 +13,10 @@ import {ShareService} from '../security-authentication/service/share.service';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-  quantity = 0;
-  orders: Orders[] = [];
-  total = 0;
-  users: User;
+  orderDetail: OrderDetail[] = [];
+  userId: number;
+  totalPrice: number;
+  totalProduct: number;
 
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
@@ -24,47 +24,71 @@ export class CardComponent implements OnInit {
               private ordersService: OrdersService,
               private token: TokenStorageService,
               private shareService: ShareService) {
-    this.getCart();
-    this.shareService.getClickEvent().subscribe(next => {
-      this.getCart();
-    });
   }
 
   ngOnInit(): void {
+    this.getUserId();
   }
 
-  getCart() {
-    this.ordersService.showAllOrder(this.token.getUser()).subscribe(next => {
-      console.log(next);
-      this.orders = next;
-      this.getValue();
-    });
-  }
-
-  getValue() {
-    this.total = 0;
-    if (this.orders != null) {
-      this.quantity = this.orders.length;
-      for (let i = 0; i < this.orders.length; i++) {
-        this.total += this.orders[i].product.price * this.orders[i].quantity;
-      }
+  getUserId() {
+    if (this.token.getToken()) {
+      this.userId = this.token.getUser().id;
+      this.ordersService.showAllOrder(this.userId).subscribe(data => {
+        this.orderDetail = data;
+        console.log(this.orderDetail[0].quantity);
+        // this.getQuantityAndTotalPrice();
+      });
+    } else {
+      this.router.navigateByUrl('/login');
     }
   }
 
-  stepUp(id: number) {
-    this.ordersService.increaseQuantity(id).subscribe(next => {
-      this.shareService.sendClickEvent();
-      this.getCart();
-      this.getValue();
+
+  // changQuantity(event, order: Orders) {
+  //   order.quantity = event.target.value;
+  //   this.getCart(order.id, order.quantity);
+  // }
+  //
+  // inc(order: Orders) {
+  //   order.quantity++;
+  //   this.getCart(order.id, order.quantity);
+  // }
+  //
+  // desc(order: Orders) {
+  //   if (order.quantity > 1) {
+  //     order.quantity--;
+  //     this.getCart(order.id, order.quantity);
+  //   }
+  // }
+
+  getCart(orderDetailId: number, quantity: number) {
+    this.ordersService.changeQuantity(orderDetailId, quantity).subscribe(() => {
+      this.ordersService.showAllOrder(this.userId).subscribe(data => {
+        this.orderDetail = data;
+
+        // this.getQuantityAndTotalPrice();
+      });
     });
   }
 
-  stepDown(id: number) {
-    this.ordersService.reduceQuantity(id).subscribe(next => {
-      this.shareService.sendClickEvent();
-      this.getCart();
-      this.getValue();
-    });
+  // getQuantityAndTotalPrice() {
+  //   this.totalProduct = 0;
+  //   this.totalPrice = 0;
+  //   if (this.orderDetail) {
+  //     // tslint:disable-next-line:prefer-for-of
+  //     for (let i = 0; i < this.orderDetail?.length; i++) {
+  //       // @ts-ignore
+  //       // tslint:disable-next-line:radix
+  //       this.totalProduct += parseInt(this.orders[i].quantity);
+  //       this.totalPrice += (this.orderDetail[i].price * this.orderDetail[i].quantity);
+  //     }
+  //     this.shareService.getTotalProduct().subscribe(totalProduct => {
+  //       this.totalProduct = totalProduct;
+  //       this.shareService.sendClickEvent();
+  //     });
+  //     console.log(this.orderDetail);
+  //   }
+  // }
 
-  }
+
 }

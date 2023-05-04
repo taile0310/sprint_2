@@ -15,6 +15,7 @@ export class UserGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.token.getToken()) {
+      // tslint:disable-next-line:max-line-length
       if ((this.token.getRole() === 'ROLE_ADMIN' || this.token.getRole() === 'ROLE_EMPLOYEE' || this.token.getRole() === 'ROLE_CUSTOMER') && this.token.isLogger()) {
         return true;
       } else {
