@@ -43,50 +43,26 @@
         </div>
         <small class="pt-1">(50 Đánh giá)</small>
       </div>
-      <h3 class="font-weight-semi-bold mb-4">{{product?.price|  number:'1.0-0'}} đ</h3>
+      <h3 class="font-weight-semi-bold mb-4">{{product?.price * product.quantity|  number:'1.0-0'}}đ</h3>
       <p class="mb-4">{{product?.productDescription}} </p>
       <div class="d-flex mb-3">
       </div>
-      <div class="d-flex mb-4">
-        <p class="text-dark font-weight-medium mb-0 mr-3">Bảng màu:</p>
-        <form>
-          <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="color-1" name="color">
-            <label class="custom-control-label" for="color-1">Immanence</label>
-          </div>
-          <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="color-2" name="color">
-            <label class="custom-control-label" for="color-2">Macaron Red</label>
-          </div>
-          <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="color-3" name="color">
-            <label class="custom-control-label" for="color-3">Beige Avenue</label>
-          </div>
-          <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="color-4" name="color">
-            <label class="custom-control-label" for="color-4">Cutesicle</label>
-          </div>
-          <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="color-5" name="color">
-            <label class="custom-control-label" for="color-5">Needful</label>
-          </div>
-        </form>
-      </div>
+      <div class="d-flex mb-4"></div>
       <div class="d-flex align-items-center mb-4 pt-2">
         <div class="input-group quantity mr-3" style="width: 130px;">
           <div class="input-group-btn">
-            <button class="btn btn-primary btn-minus">
+            <button class="btn btn-primary btn-minus"  (click)="desc()">
               <i class="fa fa-minus"></i>
             </button>
           </div>
-          <input type="text" class="form-control bg-secondary text-center" value="1">
+          <p type="text" class="form-control bg-secondary text-center">{{product.quantity}}</p>
           <div class="input-group-btn">
-            <button class="btn btn-primary btn-plus">
+            <button class="btn btn-primary btn-plus" (click)="inc()">
               <i class="fa fa-plus"></i>
             </button>
           </div>
         </div>
-        <button (click)="getUserNameAccount()" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i>Thêm vào giỏ hàng</button>
+        <button (click)="addToCart(product.id, product.quantity)" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i>Thêm vào giỏ hàng</button>
       </div>
       <div class="d-flex pt-2">
         <p class="text-dark font-weight-medium mb-0 mr-2">Chia sẻ:</p>

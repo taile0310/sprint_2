@@ -19,6 +19,8 @@ public class OrderDetail {
 
     @Column(name = "quantity")
     private Integer quantity;
+    @Column(name = "pay_pal")
+    private boolean payPal;
 
 
 
@@ -30,6 +32,14 @@ public class OrderDetail {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
+    }
+
+    public boolean isPayPal() {
+        return payPal;
+    }
+
+    public void setPayPal(boolean payPal) {
+        this.payPal = payPal;
     }
 
     public Long getId() {

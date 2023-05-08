@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {TokenStorageService} from '../security-authentication/service/token-storage.service';
 import {ShareService} from '../security-authentication/service/share.service';
 import {Router} from '@angular/router';
-import Swal from "sweetalert2";
-import {OrdersService} from '../service/orders.service';
-import {Orders} from '../model/orders';
+import {OrderDetailService} from '../service/order-detail.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +18,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   constructor(private tokenStorageService: TokenStorageService,
               private shareService: ShareService,
-              private ordersService: OrdersService,
+              private ordersService: OrderDetailService,
               private token: TokenStorageService,
               private router: Router) { }
   loadHeader(): void {
@@ -44,6 +43,7 @@ export class HeaderComponent implements OnInit {
     await Swal.fire({
       text: 'Đăng xuất thành công',
       icon: 'success',
+      iconColor: '#ecb49b',
       showConfirmButton: false,
       timer: 1500
     });

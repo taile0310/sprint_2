@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface IProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findByProductNameContainingIgnoreCaseAndCategory_Id(String productName, Long categoryId, Pageable pageable);
 
@@ -14,4 +16,5 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = "select products.price from products where id = :productId", nativeQuery = true)
     Product getProductId(@Param("productId") Long productId);
+
 }

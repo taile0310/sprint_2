@@ -6,6 +6,7 @@ import {ShareService} from '../service/share.service';
 import Swal from 'sweetalert2';
 import {LoginService} from '../service/login.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
       Swal.fire({
         text: 'Bạn đã đăng nhập.',
         icon: 'warning',
+        iconColor: '#ecb49b',
         showConfirmButton: false,
         timer: 1500
       });
@@ -73,6 +75,7 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           text: 'Đăng nhập thành công',
           icon: 'success',
+          iconColor: '#ecb49b',
           showConfirmButton: false,
           timer: 1500
         });
@@ -85,7 +88,9 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           text: 'Tài khoản, mật khẩu không đúng hoặc chưa được kích hoạt!',
           icon: 'error',
-          confirmButtonText: 'OK'
+          iconColor: '#ecb49b',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ecb49b'
         });
       }
     );

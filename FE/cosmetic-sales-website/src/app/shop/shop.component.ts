@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from '../model/product';
 import {ProductService} from '../service/product.service';
 import {Category} from '../model/category';
-import {OrdersService} from '../service/orders.service';
+import {OrderDetailService} from '../service/order-detail.service';
 import {ShareService} from '../security-authentication/service/share.service';
 import {TokenStorageService} from '../security-authentication/service/token-storage.service';
-import {Orders} from '../model/orders';
 import {Router} from '@angular/router';
+import {OrderDetail} from '../model/order-detail';
 
 @Component({
   selector: 'app-shop',
@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
+
   products: Product[] = [];
   category: Category[] = [];
   product: any;
@@ -25,7 +26,7 @@ export class ShopComponent implements OnInit {
   userId: number;
 
   constructor(private productService: ProductService,
-              private ordersService: OrdersService,
+              private orderDetailService: OrderDetailService,
               private shareService: ShareService,
               private token: TokenStorageService,
               private router: Router) {
@@ -47,6 +48,7 @@ export class ShopComponent implements OnInit {
     this.view();
     this.getAll();
     this.getUserId();
+
   }
 
 
@@ -84,17 +86,16 @@ export class ShopComponent implements OnInit {
     this.getAll();
 
   }
+
+  addToCart(productId: number, quantity: number) {
+    this.orderDetailService.addToCart(this.userId, productId, quantity).subscribe(() => {
+    });
+  }
+
   view(): void {
     const element = document.getElementById('shop');
     if (element) {
       element.scrollIntoView();
     }
   }
-
-
-    addToCart(productId: number, quantity: number) {
-      this.ordersService.addToCart(this.userId, productId, quantity).subscribe(() => {
-      });
-    }
-
 }

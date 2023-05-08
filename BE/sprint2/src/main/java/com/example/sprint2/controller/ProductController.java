@@ -90,6 +90,7 @@ public class ProductController {
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> getDetailProduct(@PathVariable("id") Long id) {
         Product product = productService.findById(id);
+        product.setQuantity(1);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 

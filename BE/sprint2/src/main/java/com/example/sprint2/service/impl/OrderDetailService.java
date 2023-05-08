@@ -1,7 +1,9 @@
 package com.example.sprint2.service.impl;
 
 import com.example.sprint2.model.OrderDetail;
+import com.example.sprint2.model.Product;
 import com.example.sprint2.repository.IOrderDetailRepository;
+import com.example.sprint2.repository.IProductRepository;
 import com.example.sprint2.service.IOrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,21 +14,52 @@ import java.util.List;
 public class OrderDetailService implements IOrderDetailService {
     @Autowired
     private IOrderDetailRepository orderDetailRepository;
+    @Autowired
+    private IProductRepository productRepository;
 
     @Override
     public void save(OrderDetail orderDetail) {
         orderDetailRepository.save(orderDetail);
-
     }
 
     @Override
-    public OrderDetail findByProductIdAndUserId(Long productId, Long userId) {
-        return orderDetailRepository.findByProductIdAndUserId(productId, userId);
+    public List<OrderDetail> findOrderDetailByUserId(Long userId) {
+        return orderDetailRepository.findOrderDetailByUserId(userId);
     }
+
 
     @Override
     public List<OrderDetail> orderDetailList() {
         return orderDetailRepository.findAll();
     }
+
+    @Override
+    public OrderDetail findByIdOD(Long id) {
+        return orderDetailRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteOrderDetailByProductIdAndOrderId(Long productId, Long orderId) {
+        orderDetailRepository.deleteOrderDetailByProductIdAndOrderId(productId, orderId);
+    }
+
+    @Override
+    public void payPal(Long id) {
+        List<OrderDetail> orderDetailDTOS = orderDetailRepository.getListOD(id);
+        for (int i = 0; i < orderDetailDTOS.size(); i++) {
+            int quantityOD = orderDetailDTOS.get(i).getQuantity();
+            Product product = productRepository.findById(orderDetailDTOS.get(i).getProduct().getId()).orElse(null);
+            int paid = product.getQuantity() - quantityOD;
+            product.setQuantity(paid);
+            productRepository.save(product);
+        }
+    }
+
+    @Override
+    public List<OrderDetail> getListOD(Long id) {
+        return orderDetailRepository.getListOD(id);
+    }
+
+
 }
 

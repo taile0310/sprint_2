@@ -16,5 +16,5 @@ public interface IOrderService {
     void createCart(Order order);
 
 
-    boolean changeQuantity(Long id, int quantity);
+
 }

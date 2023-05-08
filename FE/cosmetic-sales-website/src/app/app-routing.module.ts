@@ -9,6 +9,7 @@ import {ListUserComponent} from './user/list-user/list-user.component';
 import {AdminGuard} from './security-authentication/security-auth/admin.guard';
 import {ErrorComponent} from './error/error.component';
 import {CardComponent} from './card/card.component';
+import {PayComponent} from './pay/pay.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,9 @@ const routes: Routes = [
   },
   {
     path: 'cart', component: CardComponent
+  },
+  {
+    path: 'pay', component: PayComponent
   },
   {
     path: '**', component: ErrorComponent
