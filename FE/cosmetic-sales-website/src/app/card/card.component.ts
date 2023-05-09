@@ -7,12 +7,14 @@ import {ShareService} from '../security-authentication/service/share.service';
 import {OrderDetail} from '../model/order-detail';
 import Swal from 'sweetalert2';
 
+// @ts-ignore
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
+  hasItems: boolean;
 
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
@@ -25,8 +27,7 @@ export class CardComponent implements OnInit {
   orderDetail: OrderDetail[] = [];
   userId: number;
   totalPrice = 0;
-  orderDetailDelete: OrderDetail = {};
-
+  mess = '';
 
   ngOnInit(): void {
     this.view();
@@ -61,32 +62,41 @@ export class CardComponent implements OnInit {
   getCart(orderDetailId: number, quantity: number) {
     this.orderDetailService.changeQuantity(orderDetailId, quantity).subscribe(() => {
       this.orderDetailService.showAllOrder(this.userId).subscribe(data => {
-        this.orderDetail = data;``
+        this.orderDetail = data;
         this.getQuantityAndTotalPrice();
       });
     });
   }
 
-  getQuantityAndTotalPrice() {
+ async getQuantityAndTotalPrice() {
     this.totalPrice = 0;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.orderDetail.length; i++) {
       this.totalPrice += this.orderDetail[i].price * this.orderDetail[i].quantity;
     }
+    await this.updateHasItems();
   }
-
+  // xử lý bất đồng bộ
+  async updateHasItems() {
+    this.hasItems = this.orderDetail.length > 0;
+  }
   deleteOrderDetail(productId: number, cartId: number) {
-    debugger
     this.orderDetailService.deleteOrderDetailById(productId, cartId).subscribe(data => {
       Swal.fire({
         text: 'Bỏ chọn sản phẩm thành công.',
         icon: 'warning',
         iconColor: '#ecb49b',
         confirmButtonText: 'OK',
+        confirmButtonColor: '#ecb49b',
         timer: 1500
       });
-      this.getUserId();
+      this.orderDetail = this.orderDetail.filter(order => order.id !== cartId);
+      setTimeout(() => {
+        this.hasItems = this.orderDetail.length > 0;
+      }, 500);
+      this.getQuantityAndTotalPrice();
     });
+    this.getUserId();
   }
 
 

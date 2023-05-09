@@ -60,6 +60,11 @@ public class OrderDetailService implements IOrderDetailService {
         return orderDetailRepository.getListOD(id);
     }
 
+    @Override
+    public OrderDetail updateSttPayPal(Long odId) {
+        return orderDetailRepository.updateSttPayPal(odId);
+    }
+
 
 }
 

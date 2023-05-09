@@ -50,7 +50,7 @@ public class ProductController {
             productPage = productService.searchTwoField(productName, categoryId, pageable);
         }
         if (productPage.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("không tìm thấy sản phẩm",HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(productPage, HttpStatus.OK);
     }

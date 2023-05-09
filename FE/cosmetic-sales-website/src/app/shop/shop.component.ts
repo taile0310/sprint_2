@@ -6,8 +6,7 @@ import {OrderDetailService} from '../service/order-detail.service';
 import {ShareService} from '../security-authentication/service/share.service';
 import {TokenStorageService} from '../security-authentication/service/token-storage.service';
 import {Router} from '@angular/router';
-import {OrderDetail} from '../model/order-detail';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -24,6 +23,7 @@ export class ShopComponent implements OnInit {
   categoryId = 0;
   productName = '';
   userId: number;
+  searchError: boolean;
 
   constructor(private productService: ProductService,
               private orderDetailService: OrderDetailService,
@@ -39,7 +39,7 @@ export class ShopComponent implements OnInit {
     if (this.token.getToken()) {
       this.userId = this.token.getUser().id;
     } else {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/shop');
     }
   }
 
@@ -56,8 +56,15 @@ export class ShopComponent implements OnInit {
     this.productService.getListProduct(this.currentPage, this.size, this.productName, this.categoryId).subscribe(data => {
       console.log(data);
       this.product = data;
-      this.products = this.product.content;
-      this.totalPages = this.product.totalPages;
+      if (this.product !== null) {
+        this.products = this.product.content;
+        this.totalPages = this.product.totalPages;
+        this.searchError = false;
+      } else {
+        this.products = [];
+        this.totalPages = 0;
+        this.searchError = true;
+      }
     });
   }
 
@@ -66,10 +73,23 @@ export class ShopComponent implements OnInit {
     this.productService.getListProduct(this.currentPage, this.size, this.productName, this.categoryId).subscribe(data => {
       console.log(data);
       this.product = data;
-      this.products = this.product.content;
-      this.totalPages = this.product.totalPages;
+      if (this.product !== null) {
+        this.products = this.product.content;
+        this.totalPages = this.product.totalPages;
+        this.searchError = false;
+      } else {
+        this.products = [];
+        this.totalPages = 0;
+        this.searchError = true;
+      }
     });
   }
+  clearInputs() {
+    this.productName = '';
+    this.categoryId = 0;
+    this.getAll();
+  }
+
 
   previous() {
     if (this.currentPage > 0) {
@@ -88,8 +108,23 @@ export class ShopComponent implements OnInit {
   }
 
   addToCart(productId: number, quantity: number) {
-    this.orderDetailService.addToCart(this.userId, productId, quantity).subscribe(() => {
-    });
+    if (this.token.getToken()) {
+      this.userId = this.token.getUser().id;
+      this.orderDetailService.addToCart(this.userId, productId, quantity).subscribe(() => {
+        Swal.fire({
+          text: 'Sản phẩm đã được thêm vào giỏ hàng.',
+          icon: 'success',
+          iconColor: '#ecb49b',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#ecb49b',
+          timer: 1500
+        });
+      });
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+    // this.orderDetailService.addToCart(this.userId, productId, quantity).subscribe(() => {
+    // });
   }
 
   view(): void {

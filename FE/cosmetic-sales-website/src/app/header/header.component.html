@@ -104,7 +104,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto py-0">
-            <a href="" class="nav-item nav-link active">Trang chủ</a>
+            <a routerLink="" class="nav-item nav-link active">Trang chủ</a>
             <a routerLink="/shop" class="nav-item nav-link">Cửa hàng</a>
             <a [hidden]="!isLoggedIn  || role!=='ROLE_ADMIN'" routerLink="/user/list" class="nav-item nav-link">Nhân
               viên</a>
@@ -125,6 +125,9 @@
                   </div>
                   <div class="getstarted" (click)="logOut()">
                     <button class="btn">Đăng xuất</button>
+                  </div>
+                  <div class="getstarted">
+                    <button class="btn">Lịch sử mua hàng</button>
                   </div>
                 </div>
               </div>

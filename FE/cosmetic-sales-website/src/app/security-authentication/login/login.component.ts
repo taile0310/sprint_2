@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/shop');
         this.shareService.sendClickEvent();
       },
       err => {

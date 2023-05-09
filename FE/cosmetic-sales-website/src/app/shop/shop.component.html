@@ -24,32 +24,32 @@
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
             <input type="checkbox" class="custom-control-input" checked id="price-all">
             <label class="custom-control-label" for="price-all">Tất cả giá</label>
-<!--            <span class="badge border font-weight-normal">1000</span>-->
+            <!--            <span class="badge border font-weight-normal">1000</span>-->
           </div>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
             <input type="checkbox" class="custom-control-input" id="price-1">
             <label class="custom-control-label" for="price-1">0đ - 100,000đ</label>
-<!--            <span class="badge border font-weight-normal">150</span>-->
+            <!--            <span class="badge border font-weight-normal">150</span>-->
           </div>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
             <input type="checkbox" class="custom-control-input" id="price-2">
             <label class="custom-control-label" for="price-2">100,000đ - 200,000đ</label>
-<!--            <span class="badge border font-weight-normal">295</span>-->
+            <!--            <span class="badge border font-weight-normal">295</span>-->
           </div>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
             <input type="checkbox" class="custom-control-input" id="price-3">
             <label class="custom-control-label" for="price-3">200,000đ - 300,000đ</label>
-<!--            <span class="badge border font-weight-normal">246</span>-->
+            <!--            <span class="badge border font-weight-normal">246</span>-->
           </div>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
             <input type="checkbox" class="custom-control-input" id="price-4">
             <label class="custom-control-label" for="price-4">300,000đ - 400,000đ</label>
-<!--            <span class="badge border font-weight-normal">145</span>-->
+            <!--            <span class="badge border font-weight-normal">145</span>-->
           </div>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
             <input type="checkbox" class="custom-control-input" id="price-5">
             <label class="custom-control-label" for="price-5">400,000đ - 500,000đ</label>
-<!--            <span class="badge border font-weight-normal">168</span>-->
+            <!--            <span class="badge border font-weight-normal">168</span>-->
           </div>
         </form>
       </div>
@@ -71,6 +71,11 @@
                   <i class="fa fa-search"></i>
                 </button>
               </div>
+              <div class="input-group-append">
+                <button class="input-group-text bg-transparent text-primary btn" (click)="clearInputs()">
+                 Xem tất cả
+                </button>
+              </div>
             </div>
             <div class="dropdown ml-4">
               <select class="btn border dropdown-toggle" name="categoryId" [(ngModel)]="categoryId">
@@ -79,6 +84,9 @@
               </select>
             </div>
           </div>
+        </div>
+        <div *ngIf="searchError" class="alert alert-danger ">
+          Không tìm thấy kết quả phù hợp.
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 pb-1" *ngFor="let p of products">
           <div class="card product-item border-0 mb-4">
@@ -99,12 +107,12 @@
                 class="fas fa-eye text-primary mr-1"></i>Chi
                 tiết</a>
               <a (click)="addToCart(p.id, p.quantity)" class="btn btn-sm text-dark p-0"><i
-               class="fas fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ hàng</a>
+                class="fas fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ hàng</a>
             </div>
           </div>
         </div>
 
-        <div class="col-12 pb-1">
+        <div class="col-12 pb-1" *ngIf="!searchError">
           <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center mb-3">
               <li class="page-item">

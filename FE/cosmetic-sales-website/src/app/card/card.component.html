@@ -15,7 +15,12 @@
 <div class="container-fluid pt-5" >
   <div class="row px-xl-5">
     <div class="col-lg-8 table-responsive mb-5">
-      <table class="table table-bordered text-center mb-0">
+      <div *ngIf="!hasItems" class="text-center">
+        <p>Không có sản phẩm nào trong giỏ hàng.</p>
+      </div>
+
+      <table  *ngIf="hasItems"
+        class="table table-bordered text-center mb-0">
         <thead class="bg-secondary text-dark">
         <tr>
           <th>Sản phẩm</th>
@@ -25,6 +30,7 @@
           <th>Hủy</th>
         </tr>
         </thead>
+
         <tbody class="align-middle" *ngFor=" let o of orderDetail" >
         <tr>
           <td style="text-align: start" class="align-middle"><img src="{{o?.image}}" alt="" style="width: 50px;">{{o?.productName}}</td>
@@ -76,13 +82,13 @@
           </div>
           <div class="d-flex justify-content-between">
             <h6 class="font-weight-medium">Giao hàng</h6>
-            <h6 class="font-weight-medium">20,000đ</h6>
+            <h6 class="font-weight-medium" *ngIf="hasItems">20,000đ</h6>
           </div>
         </div>
         <div class="card-footer border-secondary bg-transparent">
           <div class="d-flex justify-content-between mt-2">
             <h5 class="font-weight-bold">Tổng thanh toán</h5>
-            <h5 class="font-weight-bold">{{totalPrice + 20000 |  number:'1.0-0'}}đ</h5>
+            <h5 class="font-weight-bold" *ngIf="hasItems">{{totalPrice + 20000 |  number:'1.0-0'}}đ</h5>
           </div>
           <button routerLink="/pay" class="btn btn-block btn-primary my-3 py-3">Đặt hàng</button>
         </div>

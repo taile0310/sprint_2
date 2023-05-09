@@ -139,6 +139,15 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PatchMapping("/update")
+    public ResponseEntity<?> updateSttPayPal(@RequestParam Long odId) {
+        OrderDetail orderDetail = orderDetailService.findByIdOD(odId);
+        if ( orderDetail != null) {
+            orderDetailService.updateSttPayPal(odId);
+            return new ResponseEntity<>("Cập nhập thành công trạng thái thanh toán", HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }
 
 

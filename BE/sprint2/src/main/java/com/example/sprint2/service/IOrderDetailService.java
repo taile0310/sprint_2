@@ -20,6 +20,7 @@ public interface IOrderDetailService {
 
     List<OrderDetail> getListOD(@Param("id") Long id);
 
+    OrderDetail updateSttPayPal(@Param("id") Long odId);
 
 
 }
