@@ -61,7 +61,7 @@ export class CardComponent implements OnInit {
   getCart(orderDetailId: number, quantity: number) {
     this.orderDetailService.changeQuantity(orderDetailId, quantity).subscribe(() => {
       this.orderDetailService.showAllOrder(this.userId).subscribe(data => {
-        this.orderDetail = data;
+        this.orderDetail = data;``
         this.getQuantityAndTotalPrice();
       });
     });
