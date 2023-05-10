@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -31,6 +32,12 @@ public class User {
 
     @Column(name = "phone", nullable = false)
     private String phone;
+
+    @Column(name = "date_of_birth", nullable = false)
+    private Date dateOfBirth;
+
+    @Column(name = "gender", nullable = false)
+    private boolean gender;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JsonIgnore
@@ -124,8 +131,19 @@ public class User {
         this.order = order;
     }
 
-    public void addOrder(Order order) {
-        this.order.add(order);
-        order.setUser(this);
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
     }
 }

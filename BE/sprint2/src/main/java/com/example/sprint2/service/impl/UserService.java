@@ -21,11 +21,6 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Page<User> listUser(Pageable pageable) {
-        return usersRepository.findAll(pageable);
-    }
-
-    @Override
     public void saveUser(User user) {
         usersRepository.save(user);
     }
@@ -38,6 +33,16 @@ public class UserService implements IUserService {
     @Override
     public void deleteById(Long id) {
         usersRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<User> customerPage(Pageable pageable) {
+        return usersRepository.customerPage(pageable);
+    }
+
+    @Override
+    public Page<User> employeePage(Pageable pageable) {
+        return usersRepository.employeePage(pageable);
     }
 
 }

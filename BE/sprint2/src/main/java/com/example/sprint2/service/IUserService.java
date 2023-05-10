@@ -9,10 +9,14 @@ import org.springframework.data.repository.query.Param;
 public interface IUserService {
     User findUserByUsername(String username);
 
-    Page<User> listUser(Pageable pageable);
 
     void saveUser(User user);
     User findById( Long id);
     void deleteById(@Param("id") Long id);
+
+    Page<User> customerPage(Pageable pageable);
+
+    Page<User> employeePage(Pageable pageable);
+
 
 }

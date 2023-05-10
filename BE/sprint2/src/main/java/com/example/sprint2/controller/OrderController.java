@@ -5,6 +5,9 @@ import com.example.sprint2.model.*;
 import com.example.sprint2.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +25,8 @@ public class OrderController {
 
     @Autowired
     private IOrderDetailService orderDetailService;
+    @Autowired
+    private IUserService userService;
 
 
     @GetMapping("/cart/{id}")
@@ -139,15 +144,49 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/update")
+    @GetMapping("/update")
     public ResponseEntity<?> updateSttPayPal(@RequestParam Long odId) {
         OrderDetail orderDetail = orderDetailService.findByIdOD(odId);
-        if ( orderDetail != null) {
-            orderDetailService.updateSttPayPal(odId);
-            return new ResponseEntity<>("Cập nhập thành công trạng thái thanh toán", HttpStatus.OK);
+        if ( orderDetail == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        orderDetailService.updateSttPayPal(odId);
+        return new ResponseEntity<>("Cập nhập thành công trạng thái thanh toán", HttpStatus.OK);
     }
+
+    @GetMapping("/payment-history/{id}")
+    public ResponseEntity<?> getListPaymentHistory(@PathVariable("id") Long id,
+                                                   @RequestParam(required = false, defaultValue = "0") int page,
+                                                   @RequestParam(required = false, defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        Page<OrderDetailDTO> order = orderDetailService.getListPaymentHistory(id, pageable);
+        if (order.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(order, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity<?> getUser(@RequestParam Long id){
+        User user = userService.findById(id);
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+
+    @GetMapping("/list-customer")
+    public ResponseEntity<?> getListCustomer(@RequestParam(required = false, defaultValue = "0") int page,
+                                         @RequestParam(required = false, defaultValue = "5") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<User> userPage = userService.customerPage(pageable);
+        if (userPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(userPage, HttpStatus.OK);
+        }
+    }
+
+
 }
 
 

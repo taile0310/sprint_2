@@ -1,31 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../service/user.service';
+import { Component, OnInit } from '@angular/core';
 import {User} from '../../model/user';
-import {Product} from '../../model/product';
+import {OrderDetailService} from '../../service/order-detail.service';
 
 @Component({
-  selector: 'app-list-user',
-  templateUrl: './list-user.component.html',
-  styleUrls: ['./list-user.component.css']
+  selector: 'app-list-customer',
+  templateUrl: './list-customer.component.html',
+  styleUrls: ['./list-customer.component.css']
 })
-export class ListUserComponent implements OnInit {
+export class ListCustomerComponent implements OnInit {
   users: User[];
   user: any;
   currentPage = 0;
   size = 5;
   totalPages: number;
-
-
-  constructor(private userService: UserService) {
-  }
+  constructor(private orderDetailService: OrderDetailService) { }
 
   ngOnInit(): void {
     this.view();
     this.getAll();
   }
-
   getAll() {
-    this.userService.getListEmployee(this.currentPage, this.size).subscribe(data => {
+    this.orderDetailService.getListCustomer(this.currentPage, this.size).subscribe(data => {
       this.user = data;
       this.users = this.user.content;
       this.totalPages = this.user.totalPages;
@@ -46,10 +41,9 @@ export class ListUserComponent implements OnInit {
     }
   }
   view(): void {
-    const element = document.getElementById('employee');
+    const element = document.getElementById('customer');
     if (element) {
       element.scrollIntoView();
     }
   }
-
 }

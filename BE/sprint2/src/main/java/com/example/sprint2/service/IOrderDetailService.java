@@ -1,7 +1,10 @@
 package com.example.sprint2.service;
 
 
+import com.example.sprint2.dto.OrderDetailDTO;
 import com.example.sprint2.model.OrderDetail;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -20,7 +23,11 @@ public interface IOrderDetailService {
 
     List<OrderDetail> getListOD(@Param("id") Long id);
 
-    OrderDetail updateSttPayPal(@Param("id") Long odId);
+    void updateSttPayPal( Long odId);
+
+    Page<OrderDetailDTO> getListPaymentHistory(@Param("userId") Long userId, Pageable pageable);
+
+
 
 
 }

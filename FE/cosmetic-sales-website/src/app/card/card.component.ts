@@ -6,6 +6,7 @@ import {TokenStorageService} from '../security-authentication/service/token-stor
 import {ShareService} from '../security-authentication/service/share.service';
 import {OrderDetail} from '../model/order-detail';
 import Swal from 'sweetalert2';
+import {Product} from '../model/product';
 
 // @ts-ignore
 @Component({
@@ -15,19 +16,18 @@ import Swal from 'sweetalert2';
 })
 export class CardComponent implements OnInit {
   hasItems: boolean;
-
-  constructor(private productService: ProductService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router,
-              private orderDetailService: OrderDetailService,
-              private token: TokenStorageService,
-              private shareService: ShareService) {
-  }
-
   orderDetail: OrderDetail[] = [];
   userId: number;
   totalPrice = 0;
-  mess = '';
+  product: Product;
+
+  constructor(private productService: ProductService,
+              private activatedRoute: ActivatedRoute,
+              private orderDetailService: OrderDetailService,
+              private router: Router,
+              private token: TokenStorageService,
+              private shareService: ShareService) {
+  }
 
   ngOnInit(): void {
     this.view();
@@ -48,18 +48,42 @@ export class CardComponent implements OnInit {
 
 
   inc(order: OrderDetail) {
-    order.quantity++;
-    this.getCart(order.id, order.quantity);
+    if (order.quantity < order.quantityProduct){
+      order.quantity++;
+      this.getCart(order.id, order.quantity);
+    } else {
+      Swal.fire({
+        text: 'Đã quá số lượng trong kho.',
+        icon: 'warning',
+        iconColor: '#ecb49b',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ecb49b',
+        timer: 1500
+      });
+    }
   }
 
   desc(order: OrderDetail) {
     if (order.quantity > 1) {
       order.quantity--;
       this.getCart(order.id, order.quantity);
+    } else {
+      Swal.fire({
+        text: 'Số lượng không được nhỏ hơn 1 .',
+        icon: 'warning',
+        iconColor: '#ecb49b',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ecb49b',
+        timer: 1500
+      });
     }
   }
 
   getCart(orderDetailId: number, quantity: number) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.orderDetail.length; i++) {
+      this.totalPrice += this.orderDetail[i].price * this.orderDetail[i].quantity;
+    }
     this.orderDetailService.changeQuantity(orderDetailId, quantity).subscribe(() => {
       this.orderDetailService.showAllOrder(this.userId).subscribe(data => {
         this.orderDetail = data;
@@ -68,7 +92,7 @@ export class CardComponent implements OnInit {
     });
   }
 
- async getQuantityAndTotalPrice() {
+  async getQuantityAndTotalPrice() {
     this.totalPrice = 0;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.orderDetail.length; i++) {
@@ -80,6 +104,7 @@ export class CardComponent implements OnInit {
   async updateHasItems() {
     this.hasItems = this.orderDetail.length > 0;
   }
+
   deleteOrderDetail(productId: number, cartId: number) {
     this.orderDetailService.deleteOrderDetailById(productId, cartId).subscribe(data => {
       Swal.fire({

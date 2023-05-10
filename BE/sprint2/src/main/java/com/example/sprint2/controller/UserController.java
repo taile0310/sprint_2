@@ -22,12 +22,12 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/list")
-    public ResponseEntity<?> getListUser(@RequestParam(required = false, defaultValue = "0") int page,
-                                         @RequestParam(required = false, defaultValue = "5") int size) {
+    @GetMapping("/list-employee")
+    public ResponseEntity<?> getListEmployee(@RequestParam(required = false, defaultValue = "0") int page,
+                                             @RequestParam(required = false, defaultValue = "5") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<User> userPage = userService.listUser(pageable);
+        Page<User> userPage = userService.employeePage(pageable);
         if (userPage.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
@@ -66,4 +66,6 @@ public class UserController {
         userService.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
+
 }

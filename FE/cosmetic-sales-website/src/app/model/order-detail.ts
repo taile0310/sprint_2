@@ -9,5 +9,6 @@ export interface OrderDetail {
   phone?: string;
   name?: string;
   email?: string;
+  quantityProduct?: number;
 
 }

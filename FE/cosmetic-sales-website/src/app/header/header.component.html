@@ -104,12 +104,12 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto py-0">
-            <a routerLink="" class="nav-item nav-link active">Trang chủ</a>
-            <a routerLink="/shop" class="nav-item nav-link">Cửa hàng</a>
+            <a routerLink="" class="nav-item nav-link ">Trang chủ</a>
+            <a routerLink="/shop" class="nav-item nav-link ">Cửa hàng</a>
             <a [hidden]="!isLoggedIn  || role!=='ROLE_ADMIN'" routerLink="/user/list" class="nav-item nav-link">Nhân
               viên</a>
-            <a [hidden]="!isLoggedIn || role =='ROLE_CUSTOMER'" routerLink="" class="nav-item nav-link">Khách hàng</a>
-            <a routerLink="" class="nav-item nav-link">Liên hệ</a>
+            <a [hidden]="!isLoggedIn || role =='ROLE_CUSTOMER'" routerLink="/customer" class="nav-item nav-link">Khách hàng</a>
+            <a routerLink="" class="nav-item nav-link ">Liên hệ</a>
           </div>
           <div class="navbar-nav ml-auto py-0">
             <a [hidden]="isLoggedIn" routerLink="/login" class="nav-item nav-link">Đăng nhập </a>
@@ -120,14 +120,17 @@
                   <i class="bi bi-person-lines-fill mx-2"></i>
                   <span style="color: #ecb49b"><b>{{nameEmployee}}</b></span></div>
                 <div class="dropdown-content p-0">
+                  <div class="getstarted" routerLink="/info">
+                    <button class="btn">Thông tin</button>
+                  </div>
                   <div class="getstarted" routerLink="/security/change-password">
                     <button class="btn">Đổi mật khẩu</button>
                   </div>
                   <div class="getstarted" (click)="logOut()">
                     <button class="btn">Đăng xuất</button>
                   </div>
-                  <div class="getstarted">
-                    <button class="btn">Lịch sử mua hàng</button>
+                  <div class="getstarted" >
+                    <button class="btn" routerLink="/pay-history">Lịch sử mua hàng</button>
                   </div>
                 </div>
               </div>

@@ -1,0 +1,73 @@
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5" id="history">
+  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+    <h1 class="font-weight-semi-bold text-uppercase mb-3">Lịch sử thanh toán</h1>
+    <div class="d-inline-flex">
+      <p class="m-0"><a routerLink="/">Trang chủ</a></p>
+      <p class="m-0 px-2">-</p>
+      <p class="m-0">Lịch sử thanh toán</p>
+      <p class="m-0 px-2">-</p>
+      <p class="m-0" style="color:  #ecb49b">{{username}}</p>
+    </div>
+  </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Cart Start -->
+<div class="container-fluid pt-5">
+  <div class="row px-xl-5">
+    <div class="col-lg-12 table-responsive mb-5">
+      <div *ngIf="this.orderDetail.length == 0" class="text-center">
+        <p>Không có lịch sử thanh toán.</p>
+      </div>
+      <table *ngIf="this.orderDetail.length > 0"
+        class="table table-bordered text-center mb-0">
+        <thead class="bg-secondary text-dark">
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Giá</th>
+          <th>Số lượng</th>
+          <th>Tổng tiền</th>
+        </tr>
+        </thead>
+        <tbody class="align-middle" *ngFor=" let o of orderDetail">
+        <tr>
+          <td style="text-align: start" class="align-middle"><img src="{{o?.image}}" alt=""
+                                                                  style="width: 50px;">{{o?.productName}}</td>
+          <td class="align-middle">{{o?.price |  number:'1.0-0'}}đ</td>
+          <td class="align-middle">{{o?.quantity}}</td>
+          <td class="align-middle">{{o?.price * o?.quantity |  number:'1.0-0'}}đ</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12 pb-1" *ngIf="this.orderDetail.length !== 0">
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mb-3">
+          <li class="page-item">
+            <button [ngClass]="{disabled: currentPage === 0}" style="background-color: #ecb49b"
+                    (click)="previous()" class="btn" aria-label="Previous">
+              <span aria-hidden="true" style="color: black">Trước</span>
+            </button>
+          </li>
+          <li>
+            <a style="color: black" class="page-link page">
+              {{ currentPage + 1 }}/ {{totalPages}}
+            </a>
+          </li>
+          <li class="page-item">
+            <button [ngClass]="{disabled: currentPage === totalPages - 1}" style="background-color:  #ecb49b"
+                    class="btn" (click)="next()" aria-label="Next">
+              <span aria-hidden="true" style="color: black">Sau</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+<!-- Cart End -->
+
+
+
+

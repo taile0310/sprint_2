@@ -11,6 +11,7 @@ public class JwtResponse {
     private String username;
 
     private String name;
+
     private List<String> roles;
 
     public JwtResponse(String token, String username, String name, Long id, List<String> roles) {
@@ -19,10 +20,13 @@ public class JwtResponse {
         this.name = name;
         this.id = id;
         this.roles = roles;
+
     }
 
     public JwtResponse() {
     }
+
+
 
     public String getAccessToken() {
         return token;
@@ -89,4 +93,6 @@ public class JwtResponse {
 
         this.name = name;
     }
+
+
 }

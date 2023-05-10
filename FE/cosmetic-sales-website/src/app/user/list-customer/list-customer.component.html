@@ -1,0 +1,73 @@
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5" id="customer">
+  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+    <h1 class="font-weight-semi-bold text-uppercase mb-3">Danh sách khách hàng</h1>
+    <div class="d-inline-flex">
+      <p class="m-0"><a routerLink="/">Trang chủ</a></p>
+      <p class="m-0 px-2">-</p>
+      <p class="m-0">Danh sách khách hàng</p>
+    </div>
+  </div>
+</div>
+<!-- Page Header End -->
+<div class="row">
+  <div class="container">
+    <div class="table-responsive" style="margin: 0 auto">
+      <table class="table table-bordered">
+        <thead style="background-color: #ecb49b">
+        <tr>
+          <th scope="col">STT</th>
+          <th scope="col">Họ và tên</th>
+          <th scope="col">Tên tài khoản</th>
+          <th scope="col">Email</th>
+          <th scope="col">Địa chỉ</th>
+          <th scope="col">Số điện thoại</th>
+          <th scope="col">Chỉnh sửa</th>
+          <th scope="col">Xóa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let u of users; index as i">
+          <td>{{i + 1}}</td>
+          <td>{{u.name}}</td>
+          <td>{{u.username}}</td>
+          <td>{{u.email}}</td>
+          <td>{{u.address}}</td>
+          <td>{{u.phone}}</td>
+          <td>
+                <span type="submit"><i class="fa-regular fa-pen-to-square"
+                                       routerLink="/employee/update/{{u.id}}"></i></span>
+          </td>
+          <td>
+            <span type="submit" data-bs-toggle="modal" data-bs-target="#deleteModal">
+              <i class="fa-regular fa-trash-can"></i></span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="col-12 pb-1">
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center mb-3">
+            <li class="page-item">
+              <button [ngClass]="{disabled: currentPage === 0}" style="background-color: #ecb49b"
+                      (click)="previous()" class="btn" aria-label="Previous">
+                <span aria-hidden="true" style="color: black">Trước</span>
+              </button>
+            </li>
+            <li>
+              <a style="color: black" class="page-link page">
+                {{ currentPage + 1 }}/ {{totalPages}}
+              </a>
+            </li>
+            <li class="page-item">
+              <button [ngClass]="{disabled: currentPage === totalPages - 1}" style="background-color:  #ecb49b"
+                      class="btn" (click)="next()" aria-label="Next">
+                <span aria-hidden="true" style="color: black">Sau</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

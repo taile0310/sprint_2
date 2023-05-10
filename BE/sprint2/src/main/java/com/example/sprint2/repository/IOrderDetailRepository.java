@@ -1,8 +1,11 @@
 package com.example.sprint2.repository;
 
+import com.example.sprint2.dto.OrderDetailDTO;
 import com.example.sprint2.model.Order;
 import com.example.sprint2.model.OrderDetail;
 import com.example.sprint2.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -31,6 +34,18 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Long>
             "         where u.id = :id and order_details.pay_pal = false", nativeQuery = true)
     List<OrderDetail> getListOD(@Param("id") Long id);
 
-    @Query(value = "update order_details set pay_pal = 0 where order_details.id = :id\n", nativeQuery = true)
-    OrderDetail updateSttPayPal(@Param("id") Long odId);
+
+    @Modifying
+    @Query(value = "update order_details set order_details.pay_pal = true where order_details.id = :id", nativeQuery = true)
+    void updateSttPayPal(@Param("id") Long odId);
+
+    @Query(value = "select p.price as price, p.id as productId, p.product_name as productName, p.image as image," +
+            "od.quantity as quantity, od.id as id,  u.address as address, u.phone as phone," +
+            "u.name as name, u.email as email" +
+            "  from orders o\n" +
+            "  join users u on u.id = o.user_id" +
+            "    join order_details od on o.id = od.order_id\n" +
+            "           join products p on p.id = od.product_id\n" +
+            "    where o.user_id = :userId and od.pay_pal = true",nativeQuery = true)
+    Page<OrderDetailDTO> getListPaymentHistory(@Param("userId") Long userId, Pageable pageable);
 }

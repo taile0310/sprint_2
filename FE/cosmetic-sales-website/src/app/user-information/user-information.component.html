@@ -1,0 +1,105 @@
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5" id="info">
+  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+    <h1 class="font-weight-semi-bold text-uppercase mb-3">Thông tin người dùng</h1>
+    <div class="d-inline-flex">
+      <p class="m-0"><a routerLink="/">Trang chủ</a></p>
+      <p class="m-0 px-2">-</p>
+      <p class="m-0">Thông tin người dùng</p>
+      <p class="m-0 px-2">-</p>
+      <p class="m-0"><a routerLink="/shop">Quay lại</a></p>
+    </div>
+  </div>
+</div>
+<!-- Page Header End -->
+
+<div class="container" style="margin-top: 120px; margin-bottom: 120px">
+  <div class="main-body">
+    <div class="p-b-10 mb-4"></div>
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img *ngIf="users.gender" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
+                   width="150">
+              <img *ngIf="!users.gender" src="https://www.givisanpharma.com/images/Ankita.png" alt="Admin" class="rounded-circle"
+                   width="150">
+              <div class="mt-3 text-dark">
+                <h4>{{users?.name}}</h4>
+                <p class=" mb-1 text-dark">{{users?.email}}</p>
+                <p class=" font-size-sm text-dark">{{users?.address}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Họ và tên</h6>
+              </div>
+              <div class="col-sm-9 text-dark">
+                {{users?.name}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-dark">
+                {{users?.email}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Số điện thoại</h6>
+              </div>
+              <div class="col-sm-9 text-dark">
+                {{users?.phone}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Ngày sinh</h6>
+              </div>
+              <div class="col-sm-9 text-dark">
+                {{users?.dateOfBirth | date : 'dd-MM-yyyy'}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Giới tính</h6>
+              </div>
+              <div class="col-sm-9 text-dark">
+                <ng-container *ngIf="users.gender == true"> Nam</ng-container>
+                <ng-container *ngIf="users.gender == false"> Nữ</ng-container>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Địa chỉ</h6>
+              </div>
+              <div class="col-sm-9 text-dark">
+                {{users?.address}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-12 " style="align-items: end">
+                <a style="background-color:#ecb49b" class="btn  text-dark" target="__blank">Sửa</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

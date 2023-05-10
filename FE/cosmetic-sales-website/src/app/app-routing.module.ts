@@ -10,6 +10,9 @@ import {AdminGuard} from './security-authentication/security-auth/admin.guard';
 import {ErrorComponent} from './error/error.component';
 import {CardComponent} from './card/card.component';
 import {PayComponent} from './pay/pay.component';
+import {PaymentHistoryComponent} from './payment-history/payment-history.component';
+import {UserInformationComponent} from './user-information/user-information.component';
+import {ListCustomerComponent} from './user/list-customer/list-customer.component';
 
 
 const routes: Routes = [
@@ -32,10 +35,19 @@ const routes: Routes = [
     path: 'user/list', component: ListUserComponent, canActivate: [AdminGuard]
   },
   {
+    path: 'customer', component: ListCustomerComponent
+  },
+  {
     path: 'cart', component: CardComponent
   },
   {
     path: 'pay', component: PayComponent
+  },
+  {
+    path: 'pay-history', component: PaymentHistoryComponent
+  },
+  {
+    path: 'info', component: UserInformationComponent
   },
   {
     path: '**', component: ErrorComponent

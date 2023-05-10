@@ -18,12 +18,11 @@ import {User} from '../model/user';
 })
 export class PayComponent implements OnInit {
   totalPrice = 0;
+  totalPrice2: any;
   orderDetail: OrderDetail[] = [];
   userId: number;
   transport = 20000;
-  private username: any;
   users: User;
-  id: number;
 
   constructor(private productService: ProductService,
               private activatedRoute: ActivatedRoute,
@@ -39,16 +38,21 @@ export class PayComponent implements OnInit {
     this.getUserId();
   }
 
+
+
   paid() {
     this.totalPrice = 0;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.orderDetail.length; i++) {
       this.totalPrice += this.orderDetail[i].price * this.orderDetail[i].quantity;
+      this.orderDetailService.updateSttPalPay(this.orderDetail[i].id).subscribe(() => {
+      });
     }
+    this.totalPrice2 = ((this.totalPrice + this.transport) / 23000).toFixed(2);
     render({
       id: '#paypal',
       currency: 'USD',
-      value: (this.totalPrice + this.transport).toString(),
+      value: this.totalPrice2.toString(),
       onApprove: (async details => {
         await Swal.fire({
           text: 'Thanh toán thành công.',
@@ -70,10 +74,12 @@ export class PayComponent implements OnInit {
   getUserId() {
     if (this.token.getToken()) {
       this.userId = this.token.getUser().id;
-      this.username = this.token.getUser().name;
       this.orderDetailService.showAllOrder(this.userId).subscribe(data => {
         this.orderDetail = data;
         this.getQuantityAndTotalPrice();
+      });
+      this.orderDetailService.getDetailUser(this.userId).subscribe(data => {
+        this.users = data;
       });
     } else {
       this.router.navigateByUrl('/login');
