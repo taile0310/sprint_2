@@ -28,7 +28,6 @@ export class CardComponent implements OnInit {
               private token: TokenStorageService,
               private shareService: ShareService) {
   }
-
   ngOnInit(): void {
     this.view();
     this.getUserId();
@@ -48,7 +47,7 @@ export class CardComponent implements OnInit {
 
 
   inc(order: OrderDetail) {
-    if (order.quantity < order.quantityProduct){
+    if (order.quantity < order.quantityProduct) {
       order.quantity++;
       this.getCart(order.id, order.quantity);
     } else {
@@ -100,6 +99,7 @@ export class CardComponent implements OnInit {
     }
     await this.updateHasItems();
   }
+
   // xử lý bất đồng bộ
   async updateHasItems() {
     this.hasItems = this.orderDetail.length > 0;
@@ -120,7 +120,10 @@ export class CardComponent implements OnInit {
         this.hasItems = this.orderDetail.length > 0;
       }, 500);
       this.getQuantityAndTotalPrice();
+      const newCount = this.shareService.getCount() - 1; // Giảm giá trị count đi 1
+      this.shareService.setCount(newCount);
     });
+
     this.getUserId();
   }
 

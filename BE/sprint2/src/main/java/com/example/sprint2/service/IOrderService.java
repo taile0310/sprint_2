@@ -14,7 +14,4 @@ public interface IOrderService {
     List<OrderDetailDTO> findCartBy(Long userId);
 
     void createCart(Order order);
-
-
-
 }

@@ -22,6 +22,7 @@ import {PayComponent} from './pay/pay.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { UserInformationComponent } from './user-information/user-information.component';
 import { ListCustomerComponent } from './user/list-customer/list-customer.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ListCustomerComponent } from './user/list-customer/list-customer.compon
     PayComponent,
     PaymentHistoryComponent,
     UserInformationComponent,
-    ListCustomerComponent
+    ListCustomerComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

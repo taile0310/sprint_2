@@ -19,6 +19,8 @@
           <th scope="col">STT</th>
           <th scope="col">Họ và tên</th>
           <th scope="col">Tên tài khoản</th>
+          <th scope="col">Ngày sinh</th>
+          <th scope="col">Giới tính</th>
           <th scope="col">Email</th>
           <th scope="col">Địa chỉ</th>
           <th scope="col">Số điện thoại</th>
@@ -31,6 +33,11 @@
           <td>{{i + 1}}</td>
           <td>{{u.name}}</td>
           <td>{{u.username}}</td>
+          <td>{{u.dateOfBirth}}</td>
+          <td>
+            <ng-container *ngIf="u.gender == true"> Nam</ng-container>
+            <ng-container *ngIf="u.gender == false"> Nữ</ng-container>
+          </td>
           <td>{{u.email}}</td>
           <td>{{u.address}}</td>
           <td>{{u.phone}}</td>

@@ -39,31 +39,47 @@ export class PayComponent implements OnInit {
   }
 
 
-
   paid() {
     this.totalPrice = 0;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.orderDetail.length; i++) {
       this.totalPrice += this.orderDetail[i].price * this.orderDetail[i].quantity;
-      this.orderDetailService.updateSttPalPay(this.orderDetail[i].id).subscribe(() => {
-      });
-    }
-    this.totalPrice2 = ((this.totalPrice + this.transport) / 23000).toFixed(2);
-    render({
-      id: '#paypal',
-      currency: 'USD',
-      value: this.totalPrice2.toString(),
-      onApprove: (async details => {
-        await Swal.fire({
-          text: 'Thanh toán thành công.',
-          icon: 'success',
+      if (this.orderDetail[i].quantity <= this.orderDetail[i].quantityProduct) {
+        this.totalPrice2 = ((this.totalPrice + this.transport) / 23000).toFixed(2);
+        document.querySelector('#paypal').innerHTML = '';
+        render({
+          id: '#paypal',
+          currency: 'USD',
+          value: this.totalPrice2.toString(),
+          onApprove: (async details => {
+            // tslint:disable-next-line:prefer-for-of
+            for (let j = 0; j < this.orderDetail.length; j++) {
+              this.payPal(this.userId);
+              this.shareService.setCount(0);
+              this.orderDetailService.updateSttPalPay(this.orderDetail[j].id).subscribe(() => {
+              });
+            }
+            Swal.fire({
+              text: 'Đã quá số lượng trong kho.',
+              icon: 'warning',
+              iconColor: '#ecb49b',
+              confirmButtonText: 'OK',
+              confirmButtonColor: '#ecb49b',
+              timer: 1500
+            });
+            this.router.navigateByUrl('/shop');
+          })
+        });
+      } else {
+        Swal.fire({
+          text: 'Thanh toán thất bại.',
+          icon: 'warning',
+          iconColor: '#ecb49b',
           showConfirmButton: false,
           timer: 1500
         });
-        await this.router.navigateByUrl('/shop');
-        this.payPal(this.userId);
-      })
-    });
+      }
+    }
   }
 
   payPal(id: number) {

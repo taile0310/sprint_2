@@ -7,9 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.Optional;
+
 @Transactional
 public interface IOrderRepository extends JpaRepository<Order,Long> {
     List<Order> findByUserAndOrderDateIsNull(User user);
@@ -22,7 +21,7 @@ public interface IOrderRepository extends JpaRepository<Order,Long> {
             "  join users u on u.id = o.user_id" +
             "    join order_details od on o.id = od.order_id\n" +
             "           join products p on p.id = od.product_id\n" +
-            "    where o.user_id = :userId and od.pay_pal = false",nativeQuery = true)
+            "    where o.user_id = :userId and od.pay_pal = false order by od.id desc",nativeQuery = true)
     List<OrderDetailDTO> findCartBy(@Param("userId") Long userId);
 
 }

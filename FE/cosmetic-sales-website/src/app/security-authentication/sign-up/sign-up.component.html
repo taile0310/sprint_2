@@ -1,5 +1,5 @@
 <div class="login-container" id="sign-up">
-  <form action="" class="form-login">
+  <form (ngSubmit)="submitAdd()" [formGroup]="signUpForm" class="form-login">
     <ul class="login-nav">
       <li class="login-nav__item ">
         <a routerLink="/login">Đăng nhập</a>
@@ -8,23 +8,48 @@
         <a routerLink="/sign-up">Đăng kí </a>
       </li>
     </ul>
-    <label for="login-input-user" class="login__label">
-      Tài khoản
-    </label>
-    <input id="login-input-user" class="login__input" type="text" />
-    <label for="login-input-password" class="login__label">
-      Mật khẩu
-    </label>
-    <input id="login-input-password" class="login__input" type="password" />
-    <label for="login-input-user" class="login__label">
-      Email
-    </label>
-    <input  class="login__input" type="text" />
-    <label  class="login__label">
-      Số điện thoại
-    </label>
-    <input  class="login__input" type="text" />
+    <label class="login__label" for="name">Họ và tên</label>
+    <input id="name" class="login__input" type="text"  name="name" formControlName="name">
+    <p *ngIf="signUpForm.controls.name.touched && signUpForm.controls.name?.errors?.required "
+       class="text-danger">Tên không được để trống</p>
 
-    <button style="margin-bottom: 10%; margin-top: 18%" class="login__submit" disabled>Đăng kí</button>
+    <label class="login__label" for="username">Tài khoản</label>
+    <input id="username" class="login__input" type="text"  name="username" formControlName="username">
+    <p *ngIf="signUpForm.controls.username.touched && signUpForm.controls.username?.errors?.required "
+       class="text-danger">Tài khoải không được để trống</p>
+
+    <label for="password" class="login__label">Mật khẩu</label>
+    <input id="password" class="login__input" type="password" name="password"  formControlName="password">
+    <p *ngIf="signUpForm.controls.password.touched && signUpForm.controls.password?.errors?.required "
+       class="text-danger">Mật khẩu không được để trống</p>
+
+    <label for="email" class="login__label">Email</label>
+    <input  class="login__input"  type="email" id="email" name="email" formControlName="email">
+    <p *ngIf="signUpForm.controls.email.touched && signUpForm.controls.email?.errors?.required "
+       class="text-danger">Email không được để trống</p>
+
+    <label  class="login__label" for="phone">Số điện thoại</label>
+    <input  class="login__input" type="text" id="phone" name="phone" formControlName="phone">
+    <p *ngIf="signUpForm.controls.phone.touched && signUpForm.controls.phone?.errors?.required "
+       class="text-danger">Số điện thoại không được để trống</p>
+
+    <label  class="login__label" for="dateOfBirth">Ngày sinh</label>
+    <input  class="login__input" type="text" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth">
+    <p *ngIf="signUpForm.controls.dateOfBirth.touched && signUpForm.controls.dateOfBirth?.errors?.required "
+       class="text-danger">Ngày sinh không được để trống</p>
+
+    <label  class="login__label" for="address">Địa chỉ</label>
+    <input  class="login__input" type="text" id="address" name="address" formControlName="address">
+    <p *ngIf="signUpForm.controls.address.touched && signUpForm.controls.address?.errors?.required "
+       class="text-danger">Địa chỉ không được để trống</p>
+
+    <label style="margin-right: 3% ">
+      <input type="radio" [value]="true" formControlName="gender"> Nam
+    </label>
+    <label style="margin-right: 3%;margin-left:5%">
+      <input type="radio" [value]="false" formControlName="gender"> Nữ
+    </label>
+
+    <button type="submit" style="margin-bottom: 10%; margin-top: 18%" class="login__submit" >Đăng kí</button>
   </form>
 </div>

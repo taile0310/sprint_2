@@ -9,9 +9,7 @@ import com.example.sprint2.service.IOrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -30,7 +28,6 @@ public class OrderDetailService implements IOrderDetailService {
     public List<OrderDetail> findOrderDetailByUserId(Long userId) {
         return orderDetailRepository.findOrderDetailByUserId(userId);
     }
-
 
     @Override
     public List<OrderDetail> orderDetailList() {
@@ -66,7 +63,7 @@ public class OrderDetailService implements IOrderDetailService {
 
     @Override
     public void updateSttPayPal(Long odId) {
-         orderDetailRepository.updateSttPayPal(odId);
+        orderDetailRepository.updateSttPayPal(odId);
     }
 
     @Override

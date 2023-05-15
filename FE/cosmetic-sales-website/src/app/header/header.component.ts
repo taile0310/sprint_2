@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from '../security-authentication/service/token-storage.service';
 import {ShareService} from '../security-authentication/service/share.service';
 import {Router} from '@angular/router';
 import {OrderDetailService} from '../service/order-detail.service';
 import Swal from 'sweetalert2';
+import {Product} from '../model/product';
+import {ProductService} from '../service/product.service';
+import {Category} from '../model/category';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +23,14 @@ export class HeaderComponent implements OnInit {
               private shareService: ShareService,
               private ordersService: OrderDetailService,
               private token: TokenStorageService,
-              private router: Router) { }
+              private router: Router,
+              private productService: ProductService) {
+  }
+
+  get counts(): number {
+    return this.shareService.getCount();
+  }
+
   loadHeader(): void {
     if (this.tokenStorageService.getToken()) {
       this.currentUser = this.tokenStorageService.getUser().username;
@@ -30,6 +40,7 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this.username != null;
     this.getUsernameAccount();
   }
+
   ngOnInit(): void {
     this.shareService.getClickEvent().subscribe(() => {
       this.loadHeader();
@@ -56,6 +67,4 @@ export class HeaderComponent implements OnInit {
       this.nameEmployee = this.tokenStorageService.getUser().name;
     }
   }
-
-
 }

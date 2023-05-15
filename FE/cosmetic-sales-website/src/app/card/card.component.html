@@ -17,9 +17,9 @@
 <div class="container-fluid pt-5" >
   <div class="row px-xl-5">
     <div class="col-lg-8 table-responsive mb-5">
-<!--      <div *ngIf="!hasItems" class="text-center">-->
-<!--        <p>Không có sản phẩm nào trong giỏ hàng.</p>-->
-<!--      </div>-->
+      <div *ngIf="!hasItems" class="text-center">
+        <p>Không có sản phẩm nào trong giỏ hàng.</p>
+      </div>
 
       <table  *ngIf="hasItems"
         class="table table-bordered text-center mb-0">
@@ -35,7 +35,9 @@
 
         <tbody class="align-middle" *ngFor=" let o of orderDetail" >
         <tr>
-          <td style="text-align: start" class="align-middle"><img src="{{o?.image}}" alt="" style="width: 50px;">{{o?.productName}}</td>
+          <td style="text-align: start" class="align-middle"><img src="{{o?.image}}" alt="" style="width: 50px;">{{o?.productName}}
+            <p *ngIf="o.quantity > o.quantityProduct" style="color: red">Sản phẩm này vừa được mua hết hãy chọn sản phẩm khác</p>
+          </td>
           <td class="align-middle">{{o?.price |  number:'1.0-0'}}đ</td>
           <td class="align-middle">
             <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -92,7 +94,7 @@
             <h5 class="font-weight-bold">Tổng thanh toán</h5>
             <h5 class="font-weight-bold" *ngIf="hasItems">{{totalPrice + 20000 |  number:'1.0-0'}}đ</h5>
           </div>
-          <button routerLink="/pay" class="btn btn-block btn-primary my-3 py-3">Đặt hàng</button>
+          <button routerLink="/pay" class="btn btn-block btn-primary my-3 py-3" [disabled]="orderDetail.length ==0">Đặt hàng</button>
         </div>
       </div>
     </div>

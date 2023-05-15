@@ -62,4 +62,8 @@ export class OrderDetailService {
   getListCustomer(page: number, size: number): Observable<any> {
     return this.httpClient.get<any>(this.api + '/list-customer' + '?page=' + page + '&size=' + size);
   }
+
+  registerUser(user: any): Observable<any> {
+    return this.httpClient.post<any>(this.api + `/register`, user);
+  }
 }

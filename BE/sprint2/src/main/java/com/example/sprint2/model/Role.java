@@ -1,7 +1,6 @@
 package com.example.sprint2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,9 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore
     private List<User> users = new ArrayList<>();
+
+    public Role() {
+    }
 
     public Long getId() {
         return id;

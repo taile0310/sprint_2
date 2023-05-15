@@ -3,17 +3,16 @@ package com.example.sprint2.controller;
 import com.example.sprint2.dto.OrderDetailDTO;
 import com.example.sprint2.model.*;
 import com.example.sprint2.service.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @CrossOrigin("*")
 @RestController
@@ -27,6 +26,9 @@ public class OrderController {
     private IOrderDetailService orderDetailService;
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @GetMapping("/cart/{id}")
@@ -147,7 +149,7 @@ public class OrderController {
     @GetMapping("/update")
     public ResponseEntity<?> updateSttPayPal(@RequestParam Long odId) {
         OrderDetail orderDetail = orderDetailService.findByIdOD(odId);
-        if ( orderDetail == null) {
+        if (orderDetail == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         orderDetailService.updateSttPayPal(odId);
@@ -158,7 +160,7 @@ public class OrderController {
     public ResponseEntity<?> getListPaymentHistory(@PathVariable("id") Long id,
                                                    @RequestParam(required = false, defaultValue = "0") int page,
                                                    @RequestParam(required = false, defaultValue = "5") int size) {
-        Pageable pageable = PageRequest.of(page,size);
+        Pageable pageable = PageRequest.of(page, size);
         Page<OrderDetailDTO> order = orderDetailService.getListPaymentHistory(id, pageable);
         if (order.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -167,15 +169,15 @@ public class OrderController {
     }
 
     @GetMapping("/detail")
-    public ResponseEntity<?> getUser(@RequestParam Long id){
+    public ResponseEntity<?> getUser(@RequestParam Long id) {
         User user = userService.findById(id);
-        return new ResponseEntity<>(user,HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 
     @GetMapping("/list-customer")
     public ResponseEntity<?> getListCustomer(@RequestParam(required = false, defaultValue = "0") int page,
-                                         @RequestParam(required = false, defaultValue = "5") int size) {
+                                             @RequestParam(required = false, defaultValue = "5") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<User> userPage = userService.customerPage(pageable);
@@ -186,7 +188,32 @@ public class OrderController {
         }
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        if (userService.findByUsername(user.getUsername()) != null) {
+            return new ResponseEntity<>("Tên đăng nhập đã tồn tại", HttpStatus.BAD_REQUEST);
+        }
+        if (userService.findByEmail(user.getEmail()) != null) {
+            return new ResponseEntity<>("Email đã tồn tại", HttpStatus.BAD_REQUEST);
+        }
 
+
+        // Mã hóa mật khẩu
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        User registeredUser = userService.registerUser(user);
+
+        // Đặt vai trò mặc định cho tài khoản
+        Role defaultRole = userService.findByIdRole(3L);
+        UserRole userRole = new UserRole();
+
+        userRole.setRole(defaultRole);
+        userRole.setUser(registeredUser);
+
+        userService.setRoleOfUser(userRole);
+
+        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+    }
 }
 
 

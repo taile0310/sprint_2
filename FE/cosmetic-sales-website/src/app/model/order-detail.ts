@@ -10,5 +10,6 @@ export interface OrderDetail {
   name?: string;
   email?: string;
   quantityProduct?: number;
+  datePayment?: string;
 
 }

@@ -1,5 +1,4 @@
 package com.example.sprint2.security_authentication.payload.reponse;
-
 import java.util.List;
 
 

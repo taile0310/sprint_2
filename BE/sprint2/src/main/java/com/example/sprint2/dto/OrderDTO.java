@@ -1,9 +1,6 @@
 package com.example.sprint2.dto;
 
-import com.example.sprint2.model.User;
-
 import java.math.BigDecimal;
-import java.util.Set;
 
 public class OrderDTO {
     private Long id;

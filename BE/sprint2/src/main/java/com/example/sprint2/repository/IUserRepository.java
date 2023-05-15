@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+
 
 public interface IUserRepository extends JpaRepository<User, Long> {
     User findUserByUsername(String username);
@@ -19,5 +19,6 @@ public interface IUserRepository extends JpaRepository<User, Long> {
             "join user_role ur on users.id = ur.user_id\n" +
             "where ur.role_id < 3", nativeQuery = true)
     Page<User> employeePage(Pageable pageable);
-
+    User findByUsername(String username);
+    User findByEmail(String email);
 }

@@ -28,9 +28,9 @@ public class ProductController {
     private ICategoryService categoryService;
 
     @GetMapping("/list-category")
-    public ResponseEntity<?> getListCategory(){
+    public ResponseEntity<?> getListCategory() {
         List<Category> categoryList = categoryService.listCategory();
-        if (categoryList.isEmpty()){
+        if (categoryList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(categoryList, HttpStatus.OK);
@@ -50,7 +50,7 @@ public class ProductController {
             productPage = productService.searchTwoField(productName, categoryId, pageable);
         }
         if (productPage.isEmpty()) {
-            return new ResponseEntity<>("không tìm thấy sản phẩm",HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("không tìm thấy sản phẩm", HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(productPage, HttpStatus.OK);
     }

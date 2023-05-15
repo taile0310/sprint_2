@@ -28,6 +28,7 @@
           <th>Giá</th>
           <th>Số lượng</th>
           <th>Tổng tiền</th>
+          <th>Ngày thanh toán</th>
         </tr>
         </thead>
         <tbody class="align-middle" *ngFor=" let o of orderDetail">
@@ -37,6 +38,7 @@
           <td class="align-middle">{{o?.price |  number:'1.0-0'}}đ</td>
           <td class="align-middle">{{o?.quantity}}</td>
           <td class="align-middle">{{o?.price * o?.quantity |  number:'1.0-0'}}đ</td>
+          <td class="align-middle">{{o?.datePayment | date : 'dd/MM/yyyy - HH:mm'}}</td>
         </tr>
         </tbody>
       </table>

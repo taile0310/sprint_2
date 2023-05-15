@@ -13,6 +13,5 @@ public interface OrderDetailDTO {
     String getPhone();
     String getName();
     String getEmail();
-
-
+    String getDatePayment();
 }

@@ -13,6 +13,7 @@ import {PayComponent} from './pay/pay.component';
 import {PaymentHistoryComponent} from './payment-history/payment-history.component';
 import {UserInformationComponent} from './user-information/user-information.component';
 import {ListCustomerComponent} from './user/list-customer/list-customer.component';
+import {ContactComponent} from './contact/contact.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,9 @@ const routes: Routes = [
   },
   {
     path: 'info', component: UserInformationComponent
+  },
+  {
+    path: 'contact', component: ContactComponent
   },
   {
     path: '**', component: ErrorComponent

@@ -4,6 +4,7 @@ import {TokenStorageService} from '../security-authentication/service/token-stor
 import {OrderDetailService} from '../service/order-detail.service';
 import {OrderDetail} from '../model/order-detail';
 import {User} from '../model/user';
+import {ShareService} from '../security-authentication/service/share.service';
 
 @Component({
   selector: 'app-payment-history',
@@ -17,13 +18,13 @@ export class PaymentHistoryComponent implements OnInit {
   currentPage = 0;
   size = 5;
   totalPages: number;
-  hasItems: boolean;
   username = '';
 
   constructor(private router: Router,
               private orderDetailService: OrderDetailService,
               private activatedRoute: ActivatedRoute,
-              private token: TokenStorageService) {
+              private token: TokenStorageService,
+              private shareService: ShareService) {
   }
 
   ngOnInit(): void {

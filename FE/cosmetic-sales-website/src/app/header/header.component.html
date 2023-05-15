@@ -2,13 +2,6 @@
 <div class="container-fluid" style="padding: 0">
   <div class="row bg-secondary py-2 px-xl-5">
     <div class="col-lg-6 d-none d-lg-block">
-      <!--                <div class="d-inline-flex align-items-center">-->
-      <!--                    <a class="text-dark" href="">FAQs</a>-->
-      <!--                    <span class="text-muted px-2">|</span>-->
-      <!--                    <a class="text-dark" href="">Help</a>-->
-      <!--                    <span class="text-muted px-2">|</span>-->
-      <!--                    <a class="text-dark" href="">Support</a>-->
-      <!--                </div>-->
     </div>
     <div class="col-lg-6 text-center text-lg-right">
       <div class="d-inline-flex align-items-center">
@@ -58,7 +51,7 @@
       </a>
       <a routerLink="/cart" class="btn border">
         <i class="fas fa-shopping-cart text-primary"></i>
-        <span class="badge">0</span>
+        <span class="badge"> {{counts}}</span>
       </a>
     </div>
   </div>
@@ -78,9 +71,9 @@
       <nav
         class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
         id="navbar-vertical">
-        <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-          <a href="" class="nav-item nav-link">Son</a>
-          <a href="" class="nav-item nav-link">Kem nền</a>
+        <section class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+          <a class="nav-item nav-link">Son</a>
+          <a class="nav-item nav-link">Kem nền</a>
           <a href="" class="nav-item nav-link">Nước tẩy trang</a>
           <a href="" class="nav-item nav-link">Xịt Khoáng</a>
           <a href="" class="nav-item nav-link">Bảng mắt</a>
@@ -89,7 +82,7 @@
           <a href="" class="nav-item nav-link">Phấn phủ</a>
           <a href="" class="nav-item nav-link">Highlight</a>
           <a href="" class="nav-item nav-link">Triệt sắc</a>
-        </div>
+        </section>
       </nav>
     </div>
     <div class="col-lg-9">
@@ -108,8 +101,9 @@
             <a routerLink="/shop" class="nav-item nav-link ">Cửa hàng</a>
             <a [hidden]="!isLoggedIn  || role!=='ROLE_ADMIN'" routerLink="/user/list" class="nav-item nav-link">Nhân
               viên</a>
-            <a [hidden]="!isLoggedIn || role =='ROLE_CUSTOMER'" routerLink="/customer" class="nav-item nav-link">Khách hàng</a>
-            <a routerLink="" class="nav-item nav-link ">Liên hệ</a>
+            <a [hidden]="!isLoggedIn || role == 'ROLE_CUSTOMER'" routerLink="/customer" class="nav-item nav-link">Khách
+              hàng</a>
+            <a routerLink="/contact" class="nav-item nav-link ">Liên hệ</a>
           </div>
           <div class="navbar-nav ml-auto py-0">
             <a [hidden]="isLoggedIn" routerLink="/login" class="nav-item nav-link">Đăng nhập </a>
@@ -129,7 +123,7 @@
                   <div class="getstarted" (click)="logOut()">
                     <button class="btn">Đăng xuất</button>
                   </div>
-                  <div class="getstarted" >
+                  <div class="getstarted">
                     <button class="btn" routerLink="/pay-history">Lịch sử mua hàng</button>
                   </div>
                 </div>
@@ -160,7 +154,7 @@
             </div>
           </div>
           <div class="carousel-item" style="height: 410px;">
-            <img  class="img-fluid" src="../../assets/img/mh_1_IROQ1200x500.jpg"
+            <img class="img-fluid" src="../../assets/img/mh_1_IROQ1200x500.jpg"
                  alt="Image">
             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
               <div class="p-3" style="max-width: 700px;">

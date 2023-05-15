@@ -22,6 +22,8 @@ public class OrderDetail {
     @Column(name = "pay_pal")
     private boolean payPal;
 
+    @Column(name = "date_payment")
+    private String datePayment;
 
 
     public OrderDetail() {
@@ -74,4 +76,11 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
+    public String getDatePayment() {
+        return datePayment;
+    }
+
+    public void setDatePayment(String datePayment) {
+        this.datePayment = datePayment;
+    }
 }
