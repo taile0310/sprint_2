@@ -8,7 +8,6 @@ import {OrderDetail} from '../model/order-detail';
 import Swal from 'sweetalert2';
 import {Product} from '../model/product';
 
-// @ts-ignore
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',

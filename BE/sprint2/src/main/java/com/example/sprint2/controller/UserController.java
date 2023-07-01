@@ -3,6 +3,7 @@ package com.example.sprint2.controller;
 
 import com.example.sprint2.dto.UserDTO;
 import com.example.sprint2.model.User;
+import com.example.sprint2.service.IProductService;
 import com.example.sprint2.service.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private IUserService userService;
+
 
     @GetMapping("/list-employee")
     public ResponseEntity<?> getListEmployee(@RequestParam(required = false, defaultValue = "0") int page,
@@ -60,12 +62,5 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
 
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
-        userService.deleteById(id);
-        return ResponseEntity.ok().build();
-    }
-
 
 }

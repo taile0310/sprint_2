@@ -2,6 +2,7 @@ package com.example.sprint2.repository;
 
 import com.example.sprint2.dto.OrderDetailDTO;
 import com.example.sprint2.model.Order;
+import com.example.sprint2.model.OrderDetail;
 import com.example.sprint2.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,5 +24,7 @@ public interface IOrderRepository extends JpaRepository<Order,Long> {
             "           join products p on p.id = od.product_id\n" +
             "    where o.user_id = :userId and od.pay_pal = false order by od.id desc",nativeQuery = true)
     List<OrderDetailDTO> findCartBy(@Param("userId") Long userId);
+
+
 
 }

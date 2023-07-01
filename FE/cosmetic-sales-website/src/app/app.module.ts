@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,10 @@ import { PaymentHistoryComponent } from './payment-history/payment-history.compo
 import { UserInformationComponent } from './user-information/user-information.component';
 import { ListCustomerComponent } from './user/list-customer/list-customer.component';
 import { ContactComponent } from './contact/contact.component';
+import {UpdateProductComponent} from './update-product/update-product.component';
+import { StatisticComponent } from './statistic/statistic.component';
+import { AddProductComponent } from './add-product/add-product.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +47,10 @@ import { ContactComponent } from './contact/contact.component';
     PaymentHistoryComponent,
     UserInformationComponent,
     ListCustomerComponent,
-    ContactComponent
+    ContactComponent,
+    UpdateProductComponent,
+    StatisticComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
@@ -55,4 +62,5 @@ import { ContactComponent } from './contact/contact.component';
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

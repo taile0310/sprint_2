@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@an
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+  showBackToTop = false;
 
   constructor() {
   }
@@ -16,11 +17,12 @@ export class FooterComponent implements OnInit {
   }
 
 
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    this.showBackToTop = (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > 500;
+  }
+
   scrollToTop() {
-    const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-    if (currentScroll > 0) {
-      window.requestAnimationFrame(this.scrollToTop.bind(this));
-      window.scrollTo(0, currentScroll - (currentScroll / 25));
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

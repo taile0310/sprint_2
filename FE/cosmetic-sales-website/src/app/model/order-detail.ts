@@ -11,5 +11,7 @@ export interface OrderDetail {
   email?: string;
   quantityProduct?: number;
   datePayment?: string;
-
+  month?: number;
+  totalAmount?: number;
+  quantityOrder?: number;
 }

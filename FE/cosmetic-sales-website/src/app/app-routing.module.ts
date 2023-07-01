@@ -14,6 +14,9 @@ import {PaymentHistoryComponent} from './payment-history/payment-history.compone
 import {UserInformationComponent} from './user-information/user-information.component';
 import {ListCustomerComponent} from './user/list-customer/list-customer.component';
 import {ContactComponent} from './contact/contact.component';
+import {UpdateProductComponent} from './update-product/update-product.component';
+import {StatisticComponent} from './statistic/statistic.component';
+import {AddProductComponent} from './add-product/add-product.component';
 
 
 const routes: Routes = [
@@ -48,7 +51,16 @@ const routes: Routes = [
     path: 'pay-history', component: PaymentHistoryComponent
   },
   {
+    path: 'update/:id', component: UpdateProductComponent, canActivate: [AdminGuard]
+  },
+  {
+    path: 'add', component: AddProductComponent, canActivate: [AdminGuard]
+  },
+  {
     path: 'info', component: UserInformationComponent
+  },
+  {
+    path: 'statistic', component: StatisticComponent
   },
   {
     path: 'contact', component: ContactComponent

@@ -1,0 +1,87 @@
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5" id="update">
+  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+    <h1 class="font-weight-semi-bold text-uppercase mb-3">Cập nhật sản phẩm</h1>
+    <div class="d-inline-flex">
+      <p class="m-0"><a href="">Trang chủ</a></p>
+      <p class="m-0 px-2">-</p>
+      <p class="m-0">Cập nhật sản phẩm</p>
+    </div>
+  </div>
+</div>
+<!-- Page Header End -->
+
+
+<!-- Shop Detail Start -->
+<div class="container-fluid py-5">
+  <form [formGroup]="productGroup" (ngSubmit)="submitUpdate()">
+    <div class="row px-xl-5">
+      <div class="col-lg-5 pb-5">
+        <div id="product-carousel" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner border">
+            <div class="carousel-item active">
+              <img class="w-100 h-100" [src]="productGroup.get('image').value" alt="Image">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+            <i class="fa fa-2x fa-angle-left text-dark"></i>
+          </a>
+          <a class="carousel-control-next" href="#product-carousel" data-slide="next">
+            <i class="fa fa-2x fa-angle-right text-dark"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-7 pb-5">
+        <div style="margin-bottom: 30px">
+          <label for="productName">Tên sản phẩm:</label>
+          <input id="productName" class="form-control" formControlName="productName">
+          <p style="color: red; position: absolute"
+             *ngIf="productGroup.controls.productName.hasError('required') && productGroup.controls.productName.touched">
+            Tên sản phẩm không được để trống.</p>
+        </div>
+
+        <div style="margin-bottom: 30px">
+          <label for="cost">Giá gốc sản phẩm:</label>
+          <input id="cost" class="form-control" formControlName="cost">
+          <p style="color: red; position: absolute"
+             *ngIf="productGroup.controls.cost.hasError('required') && productGroup.controls.cost.touched">
+            Giá gốc sản phẩm không được để trống.</p>
+        </div>
+
+        <div style="margin-bottom: 30px">
+          <label for="price">Giá bán sản phẩm:</label>
+          <input id="price" class="form-control" formControlName="price">
+          <p style="color: red; position: absolute"
+             *ngIf="productGroup.controls.price.hasError('required') && productGroup.controls.price.touched">
+            Giá bán sản phẩm không được để trống.</p>
+        </div>
+
+        <div style="margin-bottom: 30px">
+          <label for="productDescription">Mô tả sản phẩm:</label>
+          <textarea id="productDescription" class="form-control" formControlName="productDescription"></textarea>
+          <p style="color: red; position: absolute"
+             *ngIf="productGroup.controls.productDescription.hasError('required') && productGroup.controls.productDescription.touched">
+            Mô tả sản phẩm không được để trống.</p>
+        </div>
+
+
+        <div style="margin-bottom: 30px">
+          <label for="quantity">Số lượng sản phẩm trong kho:</label>
+          <input id="quantity" class="form-control" formControlName="quantity">
+          <p style="color: red; position: absolute"
+             *ngIf="productGroup.controls.quantity.hasError('required') && productGroup.controls.quantity.touched">
+            Số lượng sản phẩm không được để trống.</p>
+        </div>
+
+        <div class="d-flex mb-4 notification"></div>
+
+        <div class="d-flex align-items-center mb-4 pt-2"></div>
+        <button type="submit" class="btn btn-primary px-3"><i class="fa-regular fa-pen-to-square mr-1"></i>Cập nhập sản phẩm</button>
+        <button style="margin-left: 16px;" routerLink="/shop" class="btn btn-primary px-3"><i class="fa-sharp fa-solid fa-arrow-rotate-left"></i> Quay lại
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="row px-xl-5"></div>
+</div>

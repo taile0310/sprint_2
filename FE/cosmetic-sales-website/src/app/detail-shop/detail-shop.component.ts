@@ -18,10 +18,19 @@ export class DetailShopComponent implements OnInit {
   product: Product;
   userId: number;
   orderDetail: OrderDetail[] = [];
+  orderDetails: OrderDetail;
+  orderDetailId: number;
+  quantity: number;
+  isLoggedIn = false;
+  role: string;
+  nameEmployee: string;
+  username: string;
+  currentUser: string;
 
   constructor(private productService: ProductService,
               private orderDetailService: OrderDetailService,
               private activatedRoute: ActivatedRoute,
+              private tokenStorageService: TokenStorageService,
               private router: Router,
               private token: TokenStorageService,
               private shareService: ShareService) {
@@ -31,7 +40,9 @@ export class DetailShopComponent implements OnInit {
     this.getDetailProduct();
     this.view();
     this.getUserId();
+    this.loadHeader();
   }
+
   getDetailProduct() {
     this.activatedRoute.paramMap.subscribe(data => {
       this.id = +data.get('id');
@@ -48,9 +59,15 @@ export class DetailShopComponent implements OnInit {
     }
   }
 
-  addToCart(productId: number, quantity: number) {
+  addToCart2(productId: number, quantity: number) {
+
     if (this.token.getToken()) {
       this.userId = this.token.getUser().id;
+      this.orderDetailService.changeQuantity(this.orderDetailId, quantity).subscribe(() => {
+        this.orderDetailService.showAllOrder(this.userId).subscribe(data => {
+          this.orderDetail = data;
+        });
+      });
       // Lấy thông tin sản phẩm trong kho
       if (quantity < 1) {
         Swal.fire({
@@ -63,7 +80,7 @@ export class DetailShopComponent implements OnInit {
         });
       } else {
         // Thêm vào giỏ hàng nếu còn hàng
-        this.orderDetailService.addToCart(this.userId, productId, quantity).subscribe(data => {
+        this.orderDetailService.addToCart2(this.userId, productId, quantity).subscribe(data => {
           Swal.fire({
             text: 'Sản phẩm đã được thêm vào giỏ hàng.',
             icon: 'success',
@@ -107,6 +124,31 @@ export class DetailShopComponent implements OnInit {
   desc() {
     if (this.product.quantity > 1) {
       this.product.quantity--;
+    } else {
+      Swal.fire({
+        text: 'Số lượng không được nhỏ hơn 1 .',
+        icon: 'warning',
+        iconColor: '#ecb49b',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#ecb49b',
+        timer: 1500
+      });
+    }
+  }
+
+  loadHeader(): void {
+    if (this.tokenStorageService.getToken()) {
+      this.currentUser = this.tokenStorageService.getUser().username;
+      this.role = this.tokenStorageService.getUser().roles[0];
+      this.username = this.tokenStorageService.getUser().username;
+    }
+    this.isLoggedIn = this.username != null;
+    this.getUsernameAccount();
+  }
+
+  getUsernameAccount() {
+    if (this.tokenStorageService.getToken()) {
+      this.nameEmployee = this.tokenStorageService.getUser().name;
     }
   }
 

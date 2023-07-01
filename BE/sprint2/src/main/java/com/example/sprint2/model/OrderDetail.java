@@ -1,6 +1,7 @@
 package com.example.sprint2.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "order_details")
@@ -25,12 +26,11 @@ public class OrderDetail {
     @Column(name = "date_payment")
     private String datePayment;
 
-
     public OrderDetail() {
     }
 
 
-    public OrderDetail(Integer quantity, Product product,Order order) {
+    public OrderDetail(Integer quantity, Product product, Order order) {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
@@ -83,4 +83,6 @@ public class OrderDetail {
     public void setDatePayment(String datePayment) {
         this.datePayment = datePayment;
     }
+
+
 }

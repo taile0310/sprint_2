@@ -60,8 +60,8 @@ export class PayComponent implements OnInit {
               });
             }
             Swal.fire({
-              text: 'Đã quá số lượng trong kho.',
-              icon: 'warning',
+              text: 'Thanh toán thành công.',
+              icon: 'success',
               iconColor: '#ecb49b',
               confirmButtonText: 'OK',
               confirmButtonColor: '#ecb49b',

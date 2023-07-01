@@ -50,19 +50,21 @@
       <div class="d-flex align-items-center mb-4 pt-2">
         <div class="input-group quantity mr-3" style="width: 130px;">
           <div class="input-group-btn">
-            <button class="btn btn-primary btn-minus" (click)="desc()">
+            <button [hidden]=" role =='ROLE_ADMIN'" class="btn btn-primary btn-minus" (click)="desc()">
               <i class="fa fa-minus"></i>
             </button>
           </div>
           <p type="text" class="form-control bg-secondary text-center">{{product?.quantity}}</p>
           <div class="input-group-btn">
-            <button class="btn btn-primary btn-plus" (click)="inc()">
+            <button [hidden]=" role =='ROLE_ADMIN'" class="btn btn-primary btn-plus" (click)="inc()">
               <i class="fa fa-plus"></i>
             </button>
           </div>
         </div>
-        <button (click)="addToCart(product.id, product.quantity)" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i>Thêm vào giỏ hàng</button>
-        <button style=" margin-left: 16px;" routerLink="/shop" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i>Quay lại</button>
+        <button [hidden]=" role =='ROLE_ADMIN'" (click)="addToCart2(product.id, product.quantity)" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i>Thêm vào giỏ hàng</button>
+        <button  [hidden]=" role !=='ROLE_ADMIN'" class="btn btn-primary px-3" routerLink="/update/{{product.id}}">
+          <i class="fa-regular fa-pen-to-square mr-1"></i>Cập nhập</button>
+        <button style=" margin-left: 16px;" routerLink="/shop" class="btn btn-primary px-3"><i class="fa-sharp fa-solid fa-arrow-rotate-left"></i> Quay lại</button>
       </div>
       <div class="d-flex pt-2">
         <p class="text-dark font-weight-medium mb-0 mr-2">Chia sẻ:</p>

@@ -1,6 +1,7 @@
 package com.example.sprint2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -13,17 +14,14 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @Column(name = "order_date")
     private Date orderDate;
 
-
-
     @Column(name = "quantity")
     private Integer quantity;
-
 
 
     @OneToMany(mappedBy = "order")
@@ -54,7 +52,6 @@ public class Order {
     public void setId(Long id) {
         this.id = id;
     }
-
 
 
     public Date getOrderDate() {

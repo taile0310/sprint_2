@@ -134,6 +134,12 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * function to get detailed order list
+     *
+     * @param userId
+     * @return
+     */
     @GetMapping("/detail/{userId}")
     public ResponseEntity<?> findOrderDetailByUserId(@PathVariable Long userId) {
         List<OrderDetail> orderDetails = orderDetailService.findOrderDetailByUserId(userId);
@@ -146,6 +152,12 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * function update status payment
+     *
+     * @param odId
+     * @return
+     */
     @GetMapping("/update")
     public ResponseEntity<?> updateSttPayPal(@RequestParam Long odId) {
         OrderDetail orderDetail = orderDetailService.findByIdOD(odId);
@@ -156,6 +168,14 @@ public class OrderController {
         return new ResponseEntity<>("Cập nhập thành công trạng thái thanh toán", HttpStatus.OK);
     }
 
+    /**
+     * function get list history
+     *
+     * @param id
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("/payment-history/{id}")
     public ResponseEntity<?> getListPaymentHistory(@PathVariable("id") Long id,
                                                    @RequestParam(required = false, defaultValue = "0") int page,
@@ -174,7 +194,13 @@ public class OrderController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-
+    /**
+     * function get list customer
+     *
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("/list-customer")
     public ResponseEntity<?> getListCustomer(@RequestParam(required = false, defaultValue = "0") int page,
                                              @RequestParam(required = false, defaultValue = "5") int size) {
@@ -188,6 +214,12 @@ public class OrderController {
         }
     }
 
+    /**
+     * function sign-up
+     *
+     * @param user
+     * @return
+     */
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         if (userService.findByUsername(user.getUsername()) != null) {
@@ -214,6 +246,24 @@ public class OrderController {
 
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
+
+    /**
+     * function: thống kê
+     *
+     * @param statisticalOfYear
+     * @return
+     */
+    @GetMapping("/list-statistical")
+    public ResponseEntity<?> getListStatistical(@RequestParam(required = false, defaultValue = "2023") String statisticalOfYear) {
+        List<OrderDetailDTO> list = orderDetailService.getListStatistical(statisticalOfYear);
+        if (list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+
 }
+
 
 

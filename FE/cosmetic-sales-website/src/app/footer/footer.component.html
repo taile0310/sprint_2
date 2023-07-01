@@ -70,6 +70,7 @@
 </div>
 <!-- Footer End -->
 
-<!-- Back to Top -->
-<a (click)="scrollToTop()" role="button" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
+<button class="btn btn-primary back-to-top" (click)="scrollToTop()" [hidden]="!showBackToTop">
+  <i class="fa fa-angle-double-up"></i>
+</button>

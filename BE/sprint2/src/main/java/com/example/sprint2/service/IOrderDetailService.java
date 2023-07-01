@@ -28,6 +28,7 @@ public interface IOrderDetailService {
     Page<OrderDetailDTO> getListPaymentHistory(@Param("userId") Long userId, Pageable pageable);
 
 
+    List<OrderDetailDTO> getListStatistical(String statisticalOfYear);
 
 
 }

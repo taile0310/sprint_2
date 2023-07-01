@@ -66,4 +66,12 @@ export class OrderDetailService {
   registerUser(user: any): Observable<any> {
     return this.httpClient.post<any>(this.api + `/register`, user);
   }
+
+  // thống kê
+  showAllStatistical(statisticalOfYear: string): Observable<any> {
+    console.log(statisticalOfYear);
+    return this.httpClient.get<any>('http://localhost:8080/api/public/list-statistical?statisticalOfYear=' + statisticalOfYear);
+  }
+
+
 }

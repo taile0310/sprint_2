@@ -1,6 +1,8 @@
 package com.example.sprint2.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,15 +21,23 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "cost")
+    private Double cost;
+
     @Column(name = "image")
     private String image;
 
     @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "is_delete")
+    private boolean isDelete;
+
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "category_id")
     private Category category;
+
 
     public Product(Long id) {
         this.id = id;
@@ -69,6 +79,14 @@ public class Product {
         this.price = price;
     }
 
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
+
     public String getImage() {
         return image;
     }
@@ -92,4 +110,13 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
+
 }

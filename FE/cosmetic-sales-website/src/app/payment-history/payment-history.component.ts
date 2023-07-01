@@ -29,6 +29,7 @@ export class PaymentHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserId();
+    this.view();
   }
 
   getUserId() {

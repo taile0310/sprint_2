@@ -29,66 +29,175 @@
 </div>
 <!-- Featured End -->
 
-
 <!-- Categories Start -->
-<div class="container-fluid pt-5">
-  <div class="row px-xl-5 pb-3">
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right"></p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="../../assets/img/kemneInnisfreee500x500.jpg" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Kem nền Innisfree</h5>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right"></p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="../../assets/img/kemnenFIT500x500.jpg" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Kem nền FIT</h5>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right"></p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="../../assets/img/son-mac-500x500.jpg" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Son MAC</h5>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right"></p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="../../assets/img/bangmat3ce500x500.jpg" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Bảng mắt 3CE</h5>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right"></p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="../../assets/img/bangmatkalavu500x500.png" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Bảng mắt Kalavu</h5>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right"></p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="../../assets/img/sonboobi500x500.png" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Son Bobbi</h5>
+<section [hidden]="son.length == 0">
+  <div class="item">SON</div>
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+      <div class="col-lg-4 col-md-6 pb-1" *ngFor="let s of son">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right"></p>
+          <a routerLink="/detail/{{s.id}}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid" src="{{s.image}}" style="height: 330px; width: 380px" >
+          </a>
+          <h5 class="font-weight-semi-bold m-0">{{s.productName}}</h5>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<section [hidden]="kemNen.length == 0">
+  <div class="item">KEM NỀN</div>
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+      <div class="col-lg-4 col-md-6 pb-1" *ngFor="let kn of kemNen">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right"></p>
+          <a routerLink="/detail/{{kn.id}}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid" src="{{kn.image}}" style="height: 330px; width: 380px" >
+          </a>
+          <h5 class="font-weight-semi-bold m-0">{{kn.productName}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section [hidden]="tayTrang.length == 0">
+  <div  class="item">NƯỚC TẨY TRANG</div>
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+      <div class="col-lg-4 col-md-6 pb-1" *ngFor="let tt of tayTrang">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right"></p>
+          <a routerLink="/detail/{{tt.id}}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid" src="{{tt.image}}" style="height: 330px; width: 380px" >
+          </a>
+          <h5 class="font-weight-semi-bold m-0">{{tt.productName}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section [hidden]="xitKhoang.length == 0">
+  <div class="item">XỊT KHOÁNG</div>
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+      <div class="col-lg-4 col-md-6 pb-1" *ngFor="let xk of xitKhoang">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right"></p>
+          <a routerLink="/detail/{{xk.id}}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid" src="{{xk.image}}" style="height: 330px; width: 380px" >
+          </a>
+          <h5 class="font-weight-semi-bold m-0">{{xk.productName}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section [hidden]="bangMat.length == 0">
+  <div class="item">BẢNG MẮT</div>
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+      <div class="col-lg-4 col-md-6 pb-1" *ngFor="let bm of bangMat">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right"></p>
+          <a routerLink="/detail/{{bm.id}}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid" src="{{bm.image}}" style="height: 330px; width: 380px" >
+          </a>
+          <h5 class="font-weight-semi-bold m-0">{{bm.productName}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section [hidden]="phanMa.length == 0">
+  <div class="item">PHẤN MÁ</div>
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+      <div class="col-lg-4 col-md-6 pb-1" *ngFor="let pm of phanMa">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right"></p>
+          <a routerLink="/detail/{{pm.id}}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid" src="{{pm.image}}" style="height: 330px; width: 380px" >
+          </a>
+          <h5 class="font-weight-semi-bold m-0">{{pm.productName}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section [hidden]="ckd.length == 0">
+  <div class="item">CHE KHUYẾT ĐIẺM</div>
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+      <div class="col-lg-4 col-md-6 pb-1" *ngFor="let ckd of ckd">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right"></p>
+          <a routerLink="/detail/{{ckd.id}}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid" src="{{ckd.image}}" style="height: 330px; width: 380px" >
+          </a>
+          <h5 class="font-weight-semi-bold m-0">{{ckd.productName}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section [hidden]="phanPhu.length == 0">
+  <div class="item">PHÁN PHỦ</div>
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+      <div class="col-lg-4 col-md-6 pb-1" *ngFor="let pp of phanPhu">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right"></p>
+          <a routerLink="/detail/{{pp.id}}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid" src="{{pp.image}}" style="height: 330px; width: 380px" >
+          </a>
+          <h5 class="font-weight-semi-bold m-0">{{pp.productName}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section [hidden]="highlights.length == 0">
+  <div class="item">HIGHLIGHT</div>
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+      <div class="col-lg-4 col-md-6 pb-1" *ngFor="let h of highlights">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right"></p>
+          <a routerLink="/detail/{{h.id}}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid" src="{{h.image}}" style="height: 330px; width: 380px" >
+          </a>
+          <h5 class="font-weight-semi-bold m-0">{{h.productName}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section [hidden]="trietSac.length == 0">
+  <div  class="item">TRIỆT SẮC</div>
+  <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+      <div class="col-lg-4 col-md-6 pb-1" *ngFor="let h of highlights">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right"></p>
+          <a routerLink="/detail/{{h.id}}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid" src="{{h.image}}" style="height: 330px; width: 380px" >
+          </a>
+          <h5 class="font-weight-semi-bold m-0">{{h.productName}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- Categories End -->
 
 

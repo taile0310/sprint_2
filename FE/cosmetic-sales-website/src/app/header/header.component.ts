@@ -4,9 +4,7 @@ import {ShareService} from '../security-authentication/service/share.service';
 import {Router} from '@angular/router';
 import {OrderDetailService} from '../service/order-detail.service';
 import Swal from 'sweetalert2';
-import {Product} from '../model/product';
 import {ProductService} from '../service/product.service';
-import {Category} from '../model/category';
 
 @Component({
   selector: 'app-header',

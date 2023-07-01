@@ -1,0 +1,53 @@
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5" id="statistical">
+  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+    <h1 class="font-weight-semi-bold text-uppercase mb-3">Thống kê doanh thu</h1>
+    <div class="d-inline-flex">
+      <p class="m-0"><a routerLink="/">Trang chủ</a></p>
+      <p class="m-0 px-2">-</p>
+      <p class="m-0">Thống kê</p>
+      <p class="m-0 px-2">-</p>
+      <p class="m-0"><a routerLink="/">Quay lại</a></p>
+    </div>
+  </div>
+</div>
+<!-- Page Header End -->
+
+
+<div class="container-fluid mb-5">
+  <div class="row pb-3">
+    <div class="col-5"></div>
+    <div class="col-2">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Nhập năm cần tìm"
+                 [(ngModel)]="statisticalOfYear">
+          <div class="input-group-append">
+            <button class="btn btn-primary px-3" (click)="statistical()">
+              Tìm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5"></div>
+  </div>
+  <div style="display: flex; justify-content: space-evenly">
+    <div class="card" style="width: 17rem;">
+      <div class="card-body">
+        <h6 class="card-title">Tổng doanh thu năm {{this.statisticalOfYear}}</h6>
+        <h4 class="card-subtitle mb-2 text-body-secondary" style="color: #ecb49b"><i>{{this.totalRevenue|  number:'1.0-0'}}đ</i></h4>
+        <p class="card-text"></p>
+      </div>
+    </div>
+    <div class="card" style="width: 17rem">
+      <div class="card-body">
+        <h6 class="card-title">Tổng số đơn đặt hàng {{this.statisticalOfYear}}</h6>
+        <h4 class="card-subtitle mb-2 text-body-secondary" style="color: #ecb49b"><i>{{this.totalQuantityOrder}}</i></h4>
+        <p class="card-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="myChart"></canvas>
+</div>

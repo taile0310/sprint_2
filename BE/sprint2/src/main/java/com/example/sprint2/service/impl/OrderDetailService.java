@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -70,6 +71,13 @@ public class OrderDetailService implements IOrderDetailService {
     public Page<OrderDetailDTO> getListPaymentHistory(Long userId, Pageable pageable) {
         return orderDetailRepository.getListPaymentHistory(userId, pageable);
     }
+
+    @Override
+    public List<OrderDetailDTO> getListStatistical(String statisticalOfYear) {
+        return orderDetailRepository.getListStatistical(statisticalOfYear);
+    }
+
+
 
 
 }

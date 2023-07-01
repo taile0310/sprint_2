@@ -14,4 +14,10 @@ public interface OrderDetailDTO {
     String getName();
     String getEmail();
     String getDatePayment();
+    String getMonth();
+    Double getTotalAmount();
+    Integer getQuantityOrder();
+
+
+
 }
